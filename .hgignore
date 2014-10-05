@@ -2,3 +2,4 @@ syntax: glob
 *.suo
 obj
 bin
+.git
