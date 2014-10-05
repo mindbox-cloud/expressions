@@ -9,8 +9,9 @@
     <licenseUrl>http://opensource.org/licenses/mit-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
+    <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
     <releaseNotes></releaseNotes>
-    <copyright>Copyright 2014</copyright>
+    <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq</tags>
   </metadata>
 </package>
