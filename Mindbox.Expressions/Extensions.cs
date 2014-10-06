@@ -71,7 +71,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()();
+			return (TResult)ExpressionEvaluator.Instance.Evaluate(expression.ExpandExpressions().Body);
 		}
 
 		/// <summary>
@@ -91,7 +91,8 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(argument1);
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(argument1);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -114,7 +115,8 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(argument1, argument2);
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(argument1, argument2);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -140,7 +142,8 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(argument1, argument2, argument3);
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(argument1, argument2, argument3);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -169,7 +172,12 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(argument1, argument2, argument3, argument4);
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
+				argument1, 
+				argument2, 
+				argument3,
+				argument4);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -201,7 +209,13 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(argument1, argument2, argument3, argument4, argument5);
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
+				argument1,
+				argument2,
+				argument3,
+				argument4,
+				argument5);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -236,7 +250,14 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(argument1, argument2, argument3, argument4, argument5, argument6);
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
+				argument1,
+				argument2,
+				argument3,
+				argument4,
+				argument5,
+				argument6);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -274,14 +295,15 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
-				argument1, 
-				argument2, 
-				argument3, 
-				argument4, 
-				argument5, 
-				argument6, 
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
+				argument1,
+				argument2,
+				argument3,
+				argument4,
+				argument5,
+				argument6,
 				argument7);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -322,7 +344,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -331,6 +353,7 @@ namespace Mindbox.Expressions
 				argument6,
 				argument7,
 				argument8);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -374,7 +397,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -384,6 +407,7 @@ namespace Mindbox.Expressions
 				argument7,
 				argument8,
 				argument9);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -430,7 +454,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -441,6 +465,7 @@ namespace Mindbox.Expressions
 				argument8,
 				argument9,
 				argument10);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -490,7 +515,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -502,6 +527,7 @@ namespace Mindbox.Expressions
 				argument9,
 				argument10,
 				argument11);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -554,7 +580,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -567,6 +593,7 @@ namespace Mindbox.Expressions
 				argument10,
 				argument11,
 				argument12);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -622,7 +649,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -636,6 +663,7 @@ namespace Mindbox.Expressions
 				argument11,
 				argument12,
 				argument13);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -694,7 +722,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -709,6 +737,7 @@ namespace Mindbox.Expressions
 				argument12,
 				argument13,
 				argument14);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -770,7 +799,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -786,6 +815,7 @@ namespace Mindbox.Expressions
 				argument13,
 				argument14,
 				argument15);
+			return parameterlessExpression.Evaluate();
 		}
 
 		/// <summary>
@@ -850,7 +880,7 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			return expression.Compile()(
+			Expression<Func<TResult>> parameterlessExpression = () => expression.Evaluate(
 				argument1,
 				argument2,
 				argument3,
@@ -867,6 +897,7 @@ namespace Mindbox.Expressions
 				argument14,
 				argument15,
 				argument16);
+			return parameterlessExpression.Evaluate();
 		}
 	}
 }

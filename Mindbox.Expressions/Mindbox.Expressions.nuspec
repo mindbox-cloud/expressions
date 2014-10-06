@@ -12,6 +12,6 @@
     <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
     <releaseNotes></releaseNotes>
     <copyright>Copyright 2014 Mindbox</copyright>
-    <tags>expressions linq</tags>
+    <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>
 </package>
