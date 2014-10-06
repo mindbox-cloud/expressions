@@ -458,6 +458,10 @@ namespace Mindbox.Expressions.Tests
 
 		private sealed class NoEvaluationsAssertion : ExpressionVisitor
 		{
+			private static readonly string CompileMethodName =
+				ReflectionExpressions.GetMethodName<Expression<Func<object>>>(expression => expression.Compile());
+
+
 			public static void AssertNoEvaluations(Expression expression)
 			{
 				new NoEvaluationsAssertion().Visit(expression);
@@ -479,9 +483,10 @@ namespace Mindbox.Expressions.Tests
 				if (node.Expression.NodeType == ExpressionType.Call)
 				{
 					var methodCallExpression = (MethodCallExpression)node.Expression;
-					if (methodCallExpression.Method.DeclaringType.IsGenericType &&
+					if ((methodCallExpression.Method.DeclaringType != null) &&
+							methodCallExpression.Method.DeclaringType.IsConstructedGenericType &&
 							(methodCallExpression.Method.DeclaringType.GetGenericTypeDefinition() == typeof(Expression<>)) &&
-							(methodCallExpression.Method.Name == "Compile"))
+							(methodCallExpression.Method.Name == CompileMethodName))
 						Assert.Fail("The expression body has evaluation: \"{0}\".", node);
 				}
 
