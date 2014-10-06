@@ -120,23 +120,9 @@ namespace Mindbox.Expressions
 				{
 					var innerExpression = TryGetLambdaExpressionFromExpression(baseResult.Arguments[1]);
 					if (innerExpression != null)
-					{
-						var parameterSubstitutions = new Dictionary<ParameterExpression, Expression>();
-						var replacedParameters = new List<ParameterExpression>(innerExpression.Parameters.Count);
-						foreach (var originalParameter in innerExpression.Parameters)
-						{
-							var replacedParameter = Expression.Parameter(originalParameter.Type, originalParameter.Name);
-							parameterSubstitutions.Add(originalParameter, replacedParameter);
-							replacedParameters.Add(replacedParameter);
-						}
-
-						return Expression.Lambda(
-							innerExpression.Type,
-							Visit(ExpressionParameterSubstitutor.SubstituteParameters(
-								innerExpression.Body,
-								parameterSubstitutions)),
-							replacedParameters);
-					}
+						return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
+							innerExpression,
+							new Dictionary<ParameterExpression, Expression>()));
 				}
 			}
 
