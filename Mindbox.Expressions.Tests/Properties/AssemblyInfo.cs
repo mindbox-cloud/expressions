@@ -6,4 +6,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Mindbox.Expressions")]
 [assembly: AssemblyCopyright("Copyright © Mindbox 2014")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.1.*")]

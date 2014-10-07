@@ -8,4 +8,4 @@ using System.Runtime.InteropServices;
 	"Also allows to avoid using string constants in reflection thus enabling easy refactoring.")]
 [assembly: AssemblyCopyright("Copyright © Mindbox 2014")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.1.*")]

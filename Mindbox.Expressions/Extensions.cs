@@ -899,5 +899,839 @@ namespace Mindbox.Expressions
 				argument16);
 			return parameterlessExpression.Evaluate();
 		}
+
+		/// <summary>
+		/// Combines two boolean expressions without parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<bool>> AndAlso(
+			this Expression<Func<bool>> expression1,
+			Expression<Func<bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, bool>> AndAlso<T1>(
+			this Expression<Func<T1, bool>> expression1,
+			Expression<Func<T1, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, bool>> AndAlso<T1, T2>(
+			this Expression<Func<T1, T2, bool>> expression1,
+			Expression<Func<T1, T2, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, bool>> AndAlso<T1, T2, T3>(
+			this Expression<Func<T1, T2, T3, bool>> expression1,
+			Expression<Func<T1, T2, T3, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, bool>> AndAlso<T1, T2, T3, T4>(
+			this Expression<Func<T1, T2, T3, T4, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, bool>> AndAlso<T1, T2, T3, T4, T5>(
+			this Expression<Func<T1, T2, T3, T4, T5, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, T5, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, bool>> AndAlso<T1, T2, T3, T4, T5, T6>(
+			this Expression<Func<T1, T2, T3, T4, T5, T6, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, T5, T6, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>> AndAlso<T1, T2, T3, T4, T5, T6, T7>(
+			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>> 
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via AndAlso 
+		/// (logical "and" that evaluates the second argument only when the first one is true).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>
+			AndAlso<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaAndAlso(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions without parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<bool>> OrElse(
+			this Expression<Func<bool>> expression1,
+			Expression<Func<bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, bool>> OrElse<T1>(
+			this Expression<Func<T1, bool>> expression1,
+			Expression<Func<T1, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, bool>> OrElse<T1, T2>(
+			this Expression<Func<T1, T2, bool>> expression1,
+			Expression<Func<T1, T2, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, bool>> OrElse<T1, T2, T3>(
+			this Expression<Func<T1, T2, T3, bool>> expression1,
+			Expression<Func<T1, T2, T3, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, bool>> OrElse<T1, T2, T3, T4>(
+			this Expression<Func<T1, T2, T3, T4, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, bool>> OrElse<T1, T2, T3, T4, T5>(
+			this Expression<Func<T1, T2, T3, T4, T5, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, T5, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, bool>> OrElse<T1, T2, T3, T4, T5, T6>(
+			this Expression<Func<T1, T2, T3, T4, T5, T6, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, T5, T6, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>> OrElse<T1, T2, T3, T4, T5, T6, T7>(
+			this Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>> expression1,
+			Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
+
+		/// <summary>
+		/// Combines two boolean expressions with same parameters via OrElse
+		/// (logical "or" that evaluates the second argument only when the first one is false).
+		/// </summary>
+		/// <param name="expression1">The first expression to be combined. Cannot be null.</param>
+		/// <param name="expression2">The second expression to be combined. Cannot be null.</param>
+		/// <returns>Combined expression.</returns>
+		/// <exception cref="ArgumentNullException">When any of the expressions is null.</exception>
+		public static Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>
+			OrElse<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(
+				this Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>> expression1,
+				Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>> expression2)
+		{
+			if (expression1 == null)
+				throw new ArgumentNullException("expression1");
+			if (expression2 == null)
+				throw new ArgumentNullException("expression2");
+
+			return BooleanExpressions.CombineViaOrElse(new[]
+			{
+				expression1,
+				expression2
+			});
+		}
 	}
 }

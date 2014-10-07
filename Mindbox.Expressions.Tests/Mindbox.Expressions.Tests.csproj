@@ -51,6 +51,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BooleanExpressionsTests.cs" />
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="ExpandExpressionTests.cs" />
     <Compile Include="ExpressionEvaluatorTests.cs" />

@@ -110,7 +110,7 @@ namespace Mindbox.Expressions.Tests
 
 		private class Test2
 		{
-			public int y;
+			public int y = 1;
 
 			public int X { get; set; }
 

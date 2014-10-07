@@ -10,9 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
-    <releaseNotes>Fixed ExpressionEvaluator bug when evaluating delegate lambda.
-        Evaluate methods try to avoid compilation when somehow invoked directly
-        (instead of being used in expression expanded via ExpandExpressions method).</releaseNotes>
+    <releaseNotes>Added methods to easily combine boolean lambda expressions with AndAlso and OrElse.</releaseNotes>
     <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>
