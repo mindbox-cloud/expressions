@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Mindbox.Expressions
 {
@@ -143,7 +142,11 @@ namespace Mindbox.Expressions
 				var property = expression.Member as PropertyInfo;
 				if (property != null)
 				{
+#if NET45
 					result = property.GetValue(memberObject);
+#else
+					result = property.GetValue(memberObject, new object[0]);
+#endif
 					return true;
 				}
 			}

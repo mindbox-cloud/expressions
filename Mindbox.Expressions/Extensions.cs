@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Mindbox.Expressions
 {
@@ -180,6 +179,7 @@ namespace Mindbox.Expressions
 			return parameterlessExpression.Evaluate();
 		}
 
+#if NET40
 		/// <summary>
 		/// Represent expression evaluation. Intended to be used in another expression that is later transformed
 		/// via <c>ExpandExpressions</c> method.
@@ -899,6 +899,7 @@ namespace Mindbox.Expressions
 				argument16);
 			return parameterlessExpression.Evaluate();
 		}
+#endif
 
 		/// <summary>
 		/// Combines two boolean expressions without parameters via AndAlso 
@@ -1020,6 +1021,7 @@ namespace Mindbox.Expressions
 			});
 		}
 
+#if NET40
 		/// <summary>
 		/// Combines two boolean expressions with same parameters via AndAlso 
 		/// (logical "and" that evaluates the second argument only when the first one is true).
@@ -1316,6 +1318,7 @@ namespace Mindbox.Expressions
 				expression2
 			});
 		}
+#endif
 
 		/// <summary>
 		/// Combines two boolean expressions without parameters via OrElse
@@ -1437,6 +1440,7 @@ namespace Mindbox.Expressions
 			});
 		}
 
+#if NET40
 		/// <summary>
 		/// Combines two boolean expressions with same parameters via OrElse
 		/// (logical "or" that evaluates the second argument only when the first one is false).
@@ -1733,5 +1737,6 @@ namespace Mindbox.Expressions
 				expression2
 			});
 		}
+#endif
 	}
 }

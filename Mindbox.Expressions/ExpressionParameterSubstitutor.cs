@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Mindbox.Expressions
 {
@@ -14,8 +13,6 @@ namespace Mindbox.Expressions
 			Expression expression,
 			IDictionary<ParameterExpression, Expression> parameterSubstitutions)
 		{
-			if (expression == null)
-				throw new ArgumentNullException("expression");
 			if (parameterSubstitutions == null)
 				throw new ArgumentNullException("parameterSubstitutions");
 
@@ -44,20 +41,30 @@ namespace Mindbox.Expressions
 
 		private ExpressionParameterSubstitutor(IDictionary<ParameterExpression, Expression> parameterSubstitutions)
 		{
+			if (parameterSubstitutions == null)
+				throw new ArgumentNullException("parameterSubstitutions");
+
 			this.parameterSubstitutions = new Dictionary<ParameterExpression, Expression>(parameterSubstitutions);
 		}
 
 
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+
 			Expression substitution;
 			return parameterSubstitutions.TryGetValue(node, out substitution) ?
 				SubstituteParameters(substitution, new Dictionary<ParameterExpression, Expression>()) :
 				base.VisitParameter(node);
 		}
 
+#if NET40
 		protected override Expression VisitLambda<T>(Expression<T> node)
 		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+
 			var newParameters = new List<ParameterExpression>(node.Parameters.Count);
 
 			foreach (var oldParameter in node.Parameters)
@@ -69,5 +76,23 @@ namespace Mindbox.Expressions
 
 			return node.Update(Visit(node.Body), newParameters);
 		}
+#else
+		protected override Expression VisitLambda(LambdaExpression node)
+		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+
+			var newParameters = new List<ParameterExpression>(node.Parameters.Count);
+
+			foreach (var oldParameter in node.Parameters)
+			{
+				var newParameter = Expression.Parameter(oldParameter.Type, oldParameter.Name);
+				newParameters.Add(newParameter);
+				parameterSubstitutions.Add(oldParameter, newParameter);
+			}
+
+			return Expression.Lambda(node.Type, Visit(node.Body), newParameters);
+		}
+#endif
 	}
 }

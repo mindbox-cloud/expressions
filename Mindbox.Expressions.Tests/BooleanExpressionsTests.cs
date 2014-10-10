@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mindbox.Expressions.Tests
@@ -121,6 +120,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
+#if NET40
 		[TestMethod]
 		public void AndAlso5ParameterTest()
 		{
@@ -396,6 +396,7 @@ namespace Mindbox.Expressions.Tests
 				}
 			}
 		}
+#endif
 
 		[TestMethod]
 		public void AndAlso2ParameterReplacementTest()
@@ -529,6 +530,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
+#if NET40
 		[TestMethod]
 		public void OrElse5ParameterTest()
 		{
@@ -804,6 +806,7 @@ namespace Mindbox.Expressions.Tests
 				}
 			}
 		}
+#endif
 
 		[TestMethod]
 		public void OrElse2ParameterReplacementTest()

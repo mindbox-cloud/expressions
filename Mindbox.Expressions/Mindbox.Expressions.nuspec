@@ -14,4 +14,9 @@
     <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>
+  <files>
+    <file src="bin\Release35\*.*" target="lib\net35" />
+    <file src="bin\Release40\*.*" target="lib\net40" />
+    <file src="bin\Release45\*.*" target="lib\net45" />
+  </files>
 </package>

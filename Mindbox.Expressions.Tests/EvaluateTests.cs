@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Mindbox.Expressions.Tests
@@ -51,6 +50,7 @@ namespace Mindbox.Expressions.Tests
 			Assert.AreEqual(30, f1.Evaluate(1, 2, 3, 4));
 		}
 
+#if NET40
 		[TestMethod]
 		public void Evaluate5ArgumentsTest()
 		{
@@ -163,5 +163,6 @@ namespace Mindbox.Expressions.Tests
 
 			Assert.AreEqual(40, f1.Evaluate(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16));
 		}
+#endif
 	}
 }

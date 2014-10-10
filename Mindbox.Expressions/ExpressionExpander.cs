@@ -4,14 +4,18 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Mindbox.Expressions
 {
 	internal sealed class ExpressionExpander : ExpressionVisitor
 	{
+#if NET45
 		private static readonly MethodInfo CreateDelegateMethod = ReflectionExpressions.GetMethodInfo<MethodInfo>(methodInfo =>
 			methodInfo.CreateDelegate(default(Type), default(object)));
+#endif
+
+		private static readonly MethodInfo DelegateCreateDelegateMethod = ReflectionExpressions.GetMethodInfo(() => 
+			Delegate.CreateDelegate(default(Type), default(object), default(MethodInfo)));
 
 		private static readonly string EvaluateMethodName = 
 			ReflectionExpressions.GetMethodName<Expression<Func<object>>>(expression => expression.Evaluate());
@@ -52,7 +56,12 @@ namespace Mindbox.Expressions
 		private static bool IsCompileMethod(MethodInfo method)
 		{
 			return (method.DeclaringType != null) &&
+#if NET45
 				method.DeclaringType.IsConstructedGenericType &&
+#else
+				method.DeclaringType.IsGenericType &&
+				!method.DeclaringType.IsGenericTypeDefinition &&
+#endif
 				(method.DeclaringType.GetGenericTypeDefinition() == typeof(Expression<>)) &&
 				(method.Name == CompileMethodName);
 		}
@@ -113,9 +122,25 @@ namespace Mindbox.Expressions
 				}
 			}
 
-			if (baseResult.Method.Equals(CreateDelegateMethod) && (baseResult.Object.NodeType == ExpressionType.Constant))
+#if NET45
+			if ((baseResult.Method == CreateDelegateMethod) && (baseResult.Object.NodeType == ExpressionType.Constant))
 			{
 				var constantExpression = (ConstantExpression)baseResult.Object;
+				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
+				{
+					var innerExpression = TryGetLambdaExpressionFromExpression(baseResult.Arguments[1]);
+					if (innerExpression != null)
+						return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
+							innerExpression,
+							new Dictionary<ParameterExpression, Expression>()));
+				}
+			}
+#endif
+
+			if ((baseResult.Method == DelegateCreateDelegateMethod) && 
+				(baseResult.Arguments[2].NodeType == ExpressionType.Constant))
+			{
+				var constantExpression = (ConstantExpression)baseResult.Arguments[2];
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
 					var innerExpression = TryGetLambdaExpressionFromExpression(baseResult.Arguments[1]);
@@ -151,7 +176,11 @@ namespace Mindbox.Expressions
 
 		private bool TrySubstituteExpression(
 			Expression expressionExpression, 
-			IReadOnlyList<Expression> arguments, 
+#if NET45
+			IReadOnlyList<Expression> arguments,
+#else
+			IList<Expression> arguments, 
+#endif
 			out Expression result)
 		{
 			if (expressionExpression == null)

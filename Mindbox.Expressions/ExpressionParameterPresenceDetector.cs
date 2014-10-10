@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Mindbox.Expressions
 {
@@ -26,19 +25,39 @@ namespace Mindbox.Expressions
 
 		protected override Expression VisitParameter(ParameterExpression node)
 		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+
 			if (!allowedParameters.Contains(node))
 				doesExpressionHaveParameters = true;
 
 			return base.VisitParameter(node);
 		}
 
+#if NET40
 		protected override Expression VisitLambda<T>(Expression<T> node)
 		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+
 			allowedParameters.AddRange(node.Parameters);
 			var result = base.VisitLambda(node);
 			foreach (var parameter in node.Parameters)
 				allowedParameters.Remove(parameter);
 			return result;
 		}
+#else
+		protected override Expression VisitLambda(LambdaExpression node)
+		{
+			if (node == null)
+				throw new ArgumentNullException("node");
+
+			allowedParameters.AddRange(node.Parameters);
+			var result = base.VisitLambda(node);
+			foreach (var parameter in node.Parameters)
+				allowedParameters.Remove(parameter);
+			return result;
+		}
+#endif
 	}
 }
