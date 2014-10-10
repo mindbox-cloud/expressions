@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
-    <releaseNotes>Added methods to easily combine boolean lambda expressions with AndAlso and OrElse.</releaseNotes>
+    <releaseNotes>.NET 3.5 and .NET 4.0 support added</releaseNotes>
     <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>
