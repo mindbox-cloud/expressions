@@ -50,7 +50,7 @@ namespace Mindbox.Expressions.Tests
 			Assert.AreEqual(30, f1.Evaluate(1, 2, 3, 4));
 		}
 
-#if NET40
+#if NET40 || SL4
 		[TestMethod]
 		public void Evaluate5ArgumentsTest()
 		{

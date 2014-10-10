@@ -9,7 +9,7 @@ namespace Mindbox.Expressions
 {
 	internal sealed class ExpressionExpander : ExpressionVisitor
 	{
-#if NET45
+#if NET45 || SL5
 		private static readonly MethodInfo CreateDelegateMethod = ReflectionExpressions.GetMethodInfo<MethodInfo>(methodInfo =>
 			methodInfo.CreateDelegate(default(Type), default(object)));
 #endif
@@ -122,7 +122,7 @@ namespace Mindbox.Expressions
 				}
 			}
 
-#if NET45
+#if NET45 || SL5
 			if ((baseResult.Method == CreateDelegateMethod) && (baseResult.Object.NodeType == ExpressionType.Constant))
 			{
 				var constantExpression = (ConstantExpression)baseResult.Object;

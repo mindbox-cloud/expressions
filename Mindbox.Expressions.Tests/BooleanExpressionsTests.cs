@@ -120,7 +120,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
-#if NET40
+#if NET40 || SL4
 		[TestMethod]
 		public void AndAlso5ParameterTest()
 		{
@@ -530,7 +530,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
-#if NET40
+#if NET40 || SL4
 		[TestMethod]
 		public void OrElse5ParameterTest()
 		{

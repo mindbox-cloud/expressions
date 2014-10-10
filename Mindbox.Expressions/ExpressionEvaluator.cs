@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security;
 using System.Text;
 
 namespace Mindbox.Expressions
@@ -129,26 +130,32 @@ namespace Mindbox.Expressions
 			if (expression.NodeType != ExpressionType.MemberAccess)
 				throw new ArgumentException("expression.NodeType != ExpressionType.MemberAccess", "expression");
 
-			object memberObject;
-			if (TryEvaluateWithoutCompiling(expression.Expression, out memberObject))
+			try
 			{
-				var field = expression.Member as FieldInfo;
-				if (field != null)
+				object memberObject;
+				if (TryEvaluateWithoutCompiling(expression.Expression, out memberObject))
 				{
-					result = field.GetValue(memberObject);
-					return true;
-				}
+					var field = expression.Member as FieldInfo;
+					if (field != null)
+					{
+						result = field.GetValue(memberObject);
+						return true;
+					}
 
-				var property = expression.Member as PropertyInfo;
-				if (property != null)
-				{
+					var property = expression.Member as PropertyInfo;
+					if (property != null)
+					{
 #if NET45
-					result = property.GetValue(memberObject);
+						result = property.GetValue(memberObject);
 #else
-					result = property.GetValue(memberObject, new object[0]);
+						result = property.GetValue(memberObject, new object[0]);
 #endif
-					return true;
+						return true;
+					}
 				}
+			}
+			catch (MemberAccessException)
+			{
 			}
 
 			result = default(object);
@@ -228,8 +235,16 @@ namespace Mindbox.Expressions
 				parameters[argumentIndex] = parameter;
 			}
 
-			result = expression.Method.Invoke(methodObject, parameters);
-			return true;
+			try
+			{
+				result = expression.Method.Invoke(methodObject, parameters);
+				return true;
+			}
+			catch (MemberAccessException)
+			{
+				result = default(object);
+				return false;
+			}
 		}
 	}
 }

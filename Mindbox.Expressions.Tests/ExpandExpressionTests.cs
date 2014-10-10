@@ -573,7 +573,7 @@ namespace Mindbox.Expressions.Tests
 			private readonly List<ParameterExpression> parameters = new List<ParameterExpression>();
 
 
-#if NET40
+#if NET40 || SL4
 			protected override Expression VisitLambda<T>(Expression<T> node)
 			{
 				if (node == null)

@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
-    <releaseNotes>.NET 3.5 and .NET 4.0 support added</releaseNotes>
+    <releaseNotes>Partial trust support added. Silverlight 4 and Silverlight 5 support added.</releaseNotes>
     <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>
@@ -18,5 +18,7 @@
     <file src="bin\Release35\*.*" target="lib\net35" />
     <file src="bin\Release40\*.*" target="lib\net40" />
     <file src="bin\Release45\*.*" target="lib\net45" />
+    <file src="bin\ReleaseSL4\*.*" target="lib\sl4" />
+    <file src="bin\ReleaseSL5\*.*" target="lib\sl5" />
   </files>
 </package>

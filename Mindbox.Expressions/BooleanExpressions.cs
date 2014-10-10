@@ -26,7 +26,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -50,7 +50,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -74,7 +74,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -98,7 +98,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -122,7 +122,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -130,7 +130,7 @@ namespace Mindbox.Expressions
 				Expression.AndAlso);
 		}
 
-#if NET40
+#if NET40 || SL4
 		/// <summary>
 		/// Combines boolean expressions with same parameters via AndAlso 
 		/// (logical "and" that evaluates the second argument only when the first one is true).
@@ -146,7 +146,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, bool>>)Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -164,7 +170,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, bool>>)Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -182,7 +194,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>>)Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -201,7 +219,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>)Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -220,7 +244,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>)Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -239,7 +269,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>)Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -258,8 +294,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>)
-				Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -278,8 +319,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>)
-				Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -298,8 +344,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>)
-				Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -318,8 +369,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>)
-				Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -339,8 +395,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>)
-				Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 
 		/// <summary>
@@ -360,8 +421,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>)
-				Combine(expressions, Expression.AndAlso);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.AndAlso);
 		}
 #endif
 
@@ -380,7 +446,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -404,7 +470,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -428,7 +494,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -452,7 +518,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -476,7 +542,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, bool>>)Combine(
-#if NET40
+#if NET40 || SL5
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -484,7 +550,7 @@ namespace Mindbox.Expressions
 				Expression.OrElse);
 		}
 
-#if NET40
+#if NET40 || SL4
 		/// <summary>
 		/// Combines boolean expressions with same parameters via OrElse 
 		/// (logical "or" that evaluates the second argument only when the first one is false).
@@ -500,7 +566,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, bool>>)Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -518,7 +590,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, bool>>)Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -536,7 +614,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>>)Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -555,7 +639,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>)Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -574,7 +664,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>)Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -593,7 +689,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>)Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -612,8 +714,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>)
-				Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -632,8 +739,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>)
-				Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -652,8 +764,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>)
-				Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -672,8 +789,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>)
-				Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -693,8 +815,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>)
-				Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 
 		/// <summary>
@@ -714,8 +841,13 @@ namespace Mindbox.Expressions
 			if (expressions == null)
 				throw new ArgumentNullException("expressions");
 
-			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>)
-				Combine(expressions, Expression.OrElse);
+			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>)Combine(
+#if NET40 || SL5
+				expressions, 
+#else
+				expressions.Select(expression => (LambdaExpression)expression),
+#endif
+				Expression.OrElse);
 		}
 #endif
 
@@ -764,7 +896,7 @@ namespace Mindbox.Expressions
 			}
 			if (resultBody == null)
 				throw new ArgumentException("No expressions provided.", "expressions");
-#if NET40
+#if NET40 || SL4
 			return Expression.Lambda(resultBody, resultParameters);
 #else
 			return Expression.Lambda(resultBody, resultParameters.ToArray());
