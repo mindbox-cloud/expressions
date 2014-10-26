@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
+#if NET35
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+#if NETFX_CORE
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#endif
 
 namespace Mindbox.Expressions.Tests
 {
@@ -50,7 +55,7 @@ namespace Mindbox.Expressions.Tests
 			Assert.AreEqual(30, f1.Evaluate(1, 2, 3, 4));
 		}
 
-#if NET40 || SL4
+#if NET40 || SL4 || NETFX_CORE
 		[TestMethod]
 		public void Evaluate5ArgumentsTest()
 		{

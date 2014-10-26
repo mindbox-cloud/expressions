@@ -4,7 +4,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+#if NET35
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
+#if NETFX_CORE
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#endif
 
 namespace Mindbox.Expressions.Tests
 {
@@ -489,7 +494,7 @@ namespace Mindbox.Expressions.Tests
 				{
 					var methodCallExpression = (MethodCallExpression)node.Expression;
 					if ((methodCallExpression.Method.DeclaringType != null) &&
-#if NET45
+#if NET45 || NETFX_CORE
 							methodCallExpression.Method.DeclaringType.IsConstructedGenericType &&
 #else
 							methodCallExpression.Method.DeclaringType.IsGenericType &&
@@ -527,7 +532,12 @@ namespace Mindbox.Expressions.Tests
 							expression => expression.Evaluate())))
 					Assert.Fail("The expression body has evaluation: \"{0}\".", node);
 				if ((method.DeclaringType != null) && 
-						(method.DeclaringType.BaseType == typeof(MulticastDelegate)) && 
+#if NET35 || SL4
+						(method.DeclaringType.BaseType == 
+#else
+						(method.DeclaringType.GetTypeInfo().BaseType ==
+#endif
+							typeof(MulticastDelegate)) && 
 						(method.Name == ReflectionExpressions.GetMethodName<Action>(action => action.Invoke())))
 					Assert.Fail("The expression body has invokation: \"{0}\".", node);
 			}
@@ -573,7 +583,7 @@ namespace Mindbox.Expressions.Tests
 			private readonly List<ParameterExpression> parameters = new List<ParameterExpression>();
 
 
-#if NET40 || SL4
+#if NET40 || SL4 || NETFX_CORE
 			protected override Expression VisitLambda<T>(Expression<T> node)
 			{
 				if (node == null)

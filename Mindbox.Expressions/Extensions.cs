@@ -179,7 +179,7 @@ namespace Mindbox.Expressions
 			return parameterlessExpression.Evaluate();
 		}
 
-#if NET40 || SL4
+#if NET40 || SL4 || NETFX_CORE
 		/// <summary>
 		/// Represent expression evaluation. Intended to be used in another expression that is later transformed
 		/// via <c>ExpandExpressions</c> method.
@@ -1021,7 +1021,7 @@ namespace Mindbox.Expressions
 			});
 		}
 
-#if NET40 || SL4
+#if NET40 || SL4 || NETFX_CORE
 		/// <summary>
 		/// Combines two boolean expressions with same parameters via AndAlso 
 		/// (logical "and" that evaluates the second argument only when the first one is true).
@@ -1440,7 +1440,7 @@ namespace Mindbox.Expressions
 			});
 		}
 
-#if NET40 || SL4
+#if NET40 || SL4 || NETFX_CORE
 		/// <summary>
 		/// Combines two boolean expressions with same parameters via OrElse
 		/// (logical "or" that evaluates the second argument only when the first one is false).

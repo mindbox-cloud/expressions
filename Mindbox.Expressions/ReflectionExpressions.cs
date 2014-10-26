@@ -366,12 +366,26 @@ namespace Mindbox.Expressions
 						methodCallExpression.Method.Name.StartsWith(GetterSpecialNamePrefix, StringComparison.Ordinal) &&
 						(methodCallExpression.Method.DeclaringType != null))
 					{
-						var properties = methodCallExpression.Method.DeclaringType.GetProperties(BindingFlags.DeclaredOnly |
-							BindingFlags.Public |
-							BindingFlags.NonPublic |
-							BindingFlags.Instance |
-							BindingFlags.Static);
-						return properties.SingleOrDefault(property => property.GetGetMethod(true) == methodCallExpression.Method);
+						var properties = methodCallExpression
+							.Method
+							.DeclaringType
+#if NET35 || SL4
+							.GetProperties(BindingFlags.DeclaredOnly |
+								BindingFlags.Public |
+								BindingFlags.NonPublic |
+								BindingFlags.Instance |
+								BindingFlags.Static);
+#else
+							.GetTypeInfo()
+							.DeclaredProperties;
+#endif
+						return properties.SingleOrDefault(property => 
+#if NET45 || NETFX_CORE
+							property.GetMethod == 
+#else
+							property.GetGetMethod(true) ==
+#endif
+								methodCallExpression.Method);
 					}
 					return null;
 

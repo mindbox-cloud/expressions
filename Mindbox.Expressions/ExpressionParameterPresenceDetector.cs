@@ -34,7 +34,7 @@ namespace Mindbox.Expressions
 			return base.VisitParameter(node);
 		}
 
-#if NET40 || SL4
+#if NET40 || SL4 || NETFX_CORE
 		protected override Expression VisitLambda<T>(Expression<T> node)
 		{
 			if (node == null)

@@ -9,13 +9,38 @@ namespace Mindbox.Expressions
 {
 	internal sealed class ExpressionExpander : ExpressionVisitor
 	{
-#if NET45 || SL5
-		private static readonly MethodInfo CreateDelegateMethod = ReflectionExpressions.GetMethodInfo<MethodInfo>(methodInfo =>
-			methodInfo.CreateDelegate(default(Type), default(object)));
+		private static readonly MethodInfo MethodInfoCreateDelegateMethod = 
+#if NET45 || SL5 || NETFX_CORE
+			ReflectionExpressions.GetMethodInfo<MethodInfo>(methodInfo => 
+				methodInfo.CreateDelegate(default(Type), default(object)));
+#else
+			typeof(MethodInfo).GetMethod(
+				"CreateDelegate",
+				new[]
+				{
+					typeof(Type),
+					typeof(object)
+				});
 #endif
 
-		private static readonly MethodInfo DelegateCreateDelegateMethod = ReflectionExpressions.GetMethodInfo(() => 
-			Delegate.CreateDelegate(default(Type), default(object), default(MethodInfo)));
+		private static readonly MethodInfo DelegateCreateDelegateMethod =
+#if NET35 || SL4
+			ReflectionExpressions.GetMethodInfo(() => 
+				Delegate.CreateDelegate(default(Type), default(object), default(MethodInfo)));
+#else
+			typeof(Delegate)
+				.GetTypeInfo()
+				.GetDeclaredMethods("CreateDelegate")
+				.SingleOrDefault(method => method
+					.GetParameters()
+					.Select(parameter => parameter.ParameterType)
+					.SequenceEqual(new[]
+					{
+						typeof(Type),
+						typeof(object),
+						typeof(MethodInfo)
+					}));
+#endif
 
 		private static readonly string EvaluateMethodName = 
 			ReflectionExpressions.GetMethodName<Expression<Func<object>>>(expression => expression.Evaluate());
@@ -56,7 +81,7 @@ namespace Mindbox.Expressions
 		private static bool IsCompileMethod(MethodInfo method)
 		{
 			return (method.DeclaringType != null) &&
-#if NET45
+#if NET45 || NETFX_CORE
 				method.DeclaringType.IsConstructedGenericType &&
 #else
 				method.DeclaringType.IsGenericType &&
@@ -107,7 +132,12 @@ namespace Mindbox.Expressions
 			}
 
 			if ((baseResult.Method.DeclaringType != null) &&
-				(baseResult.Method.DeclaringType.BaseType == typeof(MulticastDelegate)) && 
+#if NET35 || SL4
+				(baseResult.Method.DeclaringType.BaseType ==
+#else
+				(baseResult.Method.DeclaringType.GetTypeInfo().BaseType ==
+#endif
+					typeof(MulticastDelegate)) &&
 				(baseResult.Method.Name == InvokeMethodName) &&
 				(baseResult.Object != null) &&
 				(baseResult.Object.NodeType == ExpressionType.Call))
@@ -122,8 +152,7 @@ namespace Mindbox.Expressions
 				}
 			}
 
-#if NET45 || SL5
-			if ((baseResult.Method == CreateDelegateMethod) && (baseResult.Object.NodeType == ExpressionType.Constant))
+			if ((baseResult.Method == MethodInfoCreateDelegateMethod) && (baseResult.Object.NodeType == ExpressionType.Constant))
 			{
 				var constantExpression = (ConstantExpression)baseResult.Object;
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
@@ -135,7 +164,6 @@ namespace Mindbox.Expressions
 							new Dictionary<ParameterExpression, Expression>()));
 				}
 			}
-#endif
 
 			if ((baseResult.Method == DelegateCreateDelegateMethod) && 
 				(baseResult.Arguments[2].NodeType == ExpressionType.Constant))
@@ -176,7 +204,7 @@ namespace Mindbox.Expressions
 
 		private bool TrySubstituteExpression(
 			Expression expressionExpression, 
-#if NET45
+#if NET45 || NETFX_CORE
 			IReadOnlyList<Expression> arguments,
 #else
 			IList<Expression> arguments, 
