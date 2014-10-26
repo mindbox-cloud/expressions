@@ -4,11 +4,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-#if NET35
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
 #if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#else
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
 namespace Mindbox.Expressions.Tests
@@ -494,7 +493,7 @@ namespace Mindbox.Expressions.Tests
 				{
 					var methodCallExpression = (MethodCallExpression)node.Expression;
 					if ((methodCallExpression.Method.DeclaringType != null) &&
-#if NET45 || NETFX_CORE
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
 							methodCallExpression.Method.DeclaringType.IsConstructedGenericType &&
 #else
 							methodCallExpression.Method.DeclaringType.IsGenericType &&
@@ -532,7 +531,7 @@ namespace Mindbox.Expressions.Tests
 							expression => expression.Evaluate())))
 					Assert.Fail("The expression body has evaluation: \"{0}\".", node);
 				if ((method.DeclaringType != null) && 
-#if NET35 || SL3
+#if NET35 || SL3 || WINDOWS_PHONE
 						(method.DeclaringType.BaseType == 
 #else
 						(method.DeclaringType.GetTypeInfo().BaseType ==
@@ -583,7 +582,7 @@ namespace Mindbox.Expressions.Tests
 			private readonly List<ParameterExpression> parameters = new List<ParameterExpression>();
 
 
-#if NET40 || SL4 || NETFX_CORE
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
 			protected override Expression VisitLambda<T>(Expression<T> node)
 			{
 				if (node == null)

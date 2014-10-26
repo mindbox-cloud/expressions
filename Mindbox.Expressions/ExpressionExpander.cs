@@ -10,7 +10,7 @@ namespace Mindbox.Expressions
 	internal sealed class ExpressionExpander : ExpressionVisitor
 	{
 		private static readonly MethodInfo MethodInfoCreateDelegateMethod = 
-#if NET45 || SL5 || NETFX_CORE
+#if NET45 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 			ReflectionExpressions.GetMethodInfo<MethodInfo>(methodInfo => 
 				methodInfo.CreateDelegate(default(Type), default(object)));
 #else
@@ -24,7 +24,7 @@ namespace Mindbox.Expressions
 #endif
 
 		private static readonly MethodInfo DelegateCreateDelegateMethod =
-#if NET35 || SL3
+#if NET35 || SL3 || WINDOWS_PHONE
 			ReflectionExpressions.GetMethodInfo(() => 
 				Delegate.CreateDelegate(default(Type), default(object), default(MethodInfo)));
 #else
@@ -81,7 +81,7 @@ namespace Mindbox.Expressions
 		private static bool IsCompileMethod(MethodInfo method)
 		{
 			return (method.DeclaringType != null) &&
-#if NET45 || NETFX_CORE
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
 				method.DeclaringType.IsConstructedGenericType &&
 #else
 				method.DeclaringType.IsGenericType &&
@@ -132,7 +132,7 @@ namespace Mindbox.Expressions
 			}
 
 			if ((baseResult.Method.DeclaringType != null) &&
-#if NET35 || SL3
+#if NET35 || SL3 || WINDOWS_PHONE
 				(baseResult.Method.DeclaringType.BaseType ==
 #else
 				(baseResult.Method.DeclaringType.GetTypeInfo().BaseType ==
@@ -204,7 +204,7 @@ namespace Mindbox.Expressions
 
 		private bool TrySubstituteExpression(
 			Expression expressionExpression, 
-#if NET45 || NETFX_CORE
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
 			IReadOnlyList<Expression> arguments,
 #else
 			IList<Expression> arguments, 

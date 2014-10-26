@@ -145,7 +145,7 @@ namespace Mindbox.Expressions
 					var property = expression.Member as PropertyInfo;
 					if (property != null)
 					{
-#if NET45 || NETFX_CORE
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
 						result = property.GetValue(memberObject);
 #else
 						result = property.GetValue(memberObject, new object[0]);
@@ -176,7 +176,7 @@ namespace Mindbox.Expressions
 			if (expression.NodeType != ExpressionType.Lambda)
 				throw new ArgumentException("expression.NodeType != ExpressionType.Lambda", "expression");
 
-#if NET35 || SL3
+#if NET35 || SL3 || WINDOWS_PHONE
 			if (typeof(Expression).IsAssignableFrom(expression.Type))
 #else
 			if (typeof(Expression).GetTypeInfo().IsAssignableFrom(expression.Type.GetTypeInfo()))

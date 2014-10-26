@@ -5,6 +5,9 @@
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseSL3 /t:Rebuild
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseSL4 /t:Rebuild
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseSL5 /t:Rebuild
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseWP71 /t:Rebuild
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseWP8 /t:Rebuild
+%windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseWPA81 /t:Rebuild
 %windir%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe /p:Configuration=ReleaseCore45 /t:Rebuild
 NuGet pack -Symbols
 NuGet pack -Exclude **/*.pdb

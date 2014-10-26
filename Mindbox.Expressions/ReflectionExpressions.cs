@@ -369,18 +369,18 @@ namespace Mindbox.Expressions
 						var properties = methodCallExpression
 							.Method
 							.DeclaringType
-#if NET35 || SL3
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
+							.GetTypeInfo()
+							.DeclaredProperties;
+#else
 							.GetProperties(BindingFlags.DeclaredOnly |
 								BindingFlags.Public |
 								BindingFlags.NonPublic |
 								BindingFlags.Instance |
 								BindingFlags.Static);
-#else
-							.GetTypeInfo()
-							.DeclaredProperties;
 #endif
 						return properties.SingleOrDefault(property => 
-#if NET45 || NETFX_CORE
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
 							property.GetMethod == 
 #else
 							property.GetGetMethod(true) ==

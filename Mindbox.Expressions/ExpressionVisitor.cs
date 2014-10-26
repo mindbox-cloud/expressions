@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Mindbox.Expressions
 {
-#if !NET40 && !SL4 && !NETFX_CORE
+#if !NET40 && !SL4 && !CORE45 && !WP8 && !WINDOWS_PHONE_APP
 	/// <summary>
 	/// Represents a visitor or rewriter for expression trees.
 	/// Not present in .NET 4.0 and higher versions of the library

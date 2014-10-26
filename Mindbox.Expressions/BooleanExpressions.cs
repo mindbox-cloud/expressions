@@ -26,7 +26,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -50,7 +50,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -74,7 +74,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -98,7 +98,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -122,7 +122,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -130,7 +130,7 @@ namespace Mindbox.Expressions
 				Expression.AndAlso);
 		}
 
-#if NET40 || SL4 || NETFX_CORE
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
 		/// <summary>
 		/// Combines boolean expressions with same parameters via AndAlso 
 		/// (logical "and" that evaluates the second argument only when the first one is true).
@@ -147,7 +147,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -171,7 +171,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -195,7 +195,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -220,7 +220,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -245,7 +245,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -270,7 +270,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -295,7 +295,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -320,7 +320,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -345,7 +345,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -370,7 +370,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -396,7 +396,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -422,7 +422,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -446,7 +446,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -470,7 +470,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -494,7 +494,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -518,7 +518,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -542,7 +542,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -550,7 +550,7 @@ namespace Mindbox.Expressions
 				Expression.OrElse);
 		}
 
-#if NET40 || SL4 || NETFX_CORE
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
 		/// <summary>
 		/// Combines boolean expressions with same parameters via OrElse 
 		/// (logical "or" that evaluates the second argument only when the first one is false).
@@ -567,7 +567,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -591,7 +591,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -615,7 +615,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -640,7 +640,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -665,7 +665,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -690,7 +690,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -715,7 +715,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -740,7 +740,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -765,7 +765,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -790,7 +790,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -816,7 +816,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -842,7 +842,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("expressions");
 
 			return (Expression<Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, bool>>)Combine(
-#if NET40 || SL5 || NETFX_CORE
+#if NET40 || SL5 || CORE45 || WP8 || WINDOWS_PHONE_APP
 				expressions, 
 #else
 				expressions.Select(expression => (LambdaExpression)expression),
@@ -862,7 +862,7 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("operation");
 
 			Expression resultBody = null;
-#if NET45 || NETFX_CORE
+#if NET45 || CORE45 || WINDOWS_PHONE_APP
 			IReadOnlyList<ParameterExpression> resultParameters = null;
 #else
 			IList<ParameterExpression> resultParameters = null;
@@ -896,7 +896,7 @@ namespace Mindbox.Expressions
 			}
 			if (resultBody == null)
 				throw new ArgumentException("No expressions provided.", "expressions");
-#if NET40 || SL4 || NETFX_CORE
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
 			return Expression.Lambda(resultBody, resultParameters);
 #else
 			return Expression.Lambda(resultBody, resultParameters.ToArray());

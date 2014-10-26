@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-#if NET35
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-#endif
 #if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#else
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
 namespace Mindbox.Expressions.Tests
@@ -125,7 +124,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
-#if NET40 || SL4 || NETFX_CORE
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
 		[TestMethod]
 		public void AndAlso5ParameterTest()
 		{
@@ -535,7 +534,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
-#if NET40 || SL4 || NETFX_CORE
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
 		[TestMethod]
 		public void OrElse5ParameterTest()
 		{
