@@ -532,7 +532,7 @@ namespace Mindbox.Expressions.Tests
 							expression => expression.Evaluate())))
 					Assert.Fail("The expression body has evaluation: \"{0}\".", node);
 				if ((method.DeclaringType != null) && 
-#if NET35 || SL4
+#if NET35 || SL3
 						(method.DeclaringType.BaseType == 
 #else
 						(method.DeclaringType.GetTypeInfo().BaseType ==

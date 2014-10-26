@@ -369,7 +369,7 @@ namespace Mindbox.Expressions
 						var properties = methodCallExpression
 							.Method
 							.DeclaringType
-#if NET35 || SL4
+#if NET35 || SL3
 							.GetProperties(BindingFlags.DeclaredOnly |
 								BindingFlags.Public |
 								BindingFlags.NonPublic |
