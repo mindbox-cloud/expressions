@@ -176,7 +176,7 @@ namespace Mindbox.Expressions
 			if (expression.NodeType != ExpressionType.Lambda)
 				throw new ArgumentException("expression.NodeType != ExpressionType.Lambda", "expression");
 
-#if NET35 || SL3 || WINDOWS_PHONE
+#if NET35 || SL3 || WINDOWS_PHONE || PORTABLE36 || PORTABLE88 || PORTABLE328
 			if (typeof(Expression).IsAssignableFrom(expression.Type))
 #else
 			if (typeof(Expression).GetTypeInfo().IsAssignableFrom(expression.Type.GetTypeInfo()))

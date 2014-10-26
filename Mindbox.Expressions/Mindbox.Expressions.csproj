@@ -281,6 +281,78 @@
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <DefaultLanguage>en-US</DefaultLanguage>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPortable88|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugPortable88\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE88</DefineConstants>
+    <DocumentationFile>bin\DebugPortable88\Mindbox.Expressions.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkProfile>Profile88</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleasePortable88|AnyCPU'">
+    <OutputPath>bin\ReleasePortable88\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE88</DefineConstants>
+    <DocumentationFile>bin\ReleasePortable88\Mindbox.Expressions.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkProfile>Profile88</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPortable36|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugPortable36\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE36</DefineConstants>
+    <DocumentationFile>bin\DebugPortable36\Mindbox.Expressions.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkProfile>Profile36</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleasePortable36|AnyCPU'">
+    <OutputPath>bin\ReleasePortable36\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE36</DefineConstants>
+    <DocumentationFile>bin\ReleasePortable36\Mindbox.Expressions.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkProfile>Profile36</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugPortable328|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\DebugPortable328\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;PORTABLE328</DefineConstants>
+    <DocumentationFile>bin\DebugPortable328\Mindbox.Expressions.XML</DocumentationFile>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'ReleasePortable328|AnyCPU'">
+    <OutputPath>bin\ReleasePortable328\</OutputPath>
+    <DefineConstants>TRACE;PORTABLE328</DefineConstants>
+    <DocumentationFile>bin\ReleasePortable328\Mindbox.Expressions.XML</DocumentationFile>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -296,8 +368,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExpressions.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition="'$(Configuration)' != 'ReleaseCore45' and '$(Configuration)' != 'DebugCore45' and '$(Configuration)' != 'ReleaseWPA81' and '$(Configuration)' != 'DebugWPA81'" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" Condition="'$(Configuration)' != 'ReleaseCore45' and '$(Configuration)' != 'DebugCore45' and '$(Configuration)' != 'ReleaseWPA81' and '$(Configuration)' != 'DebugWPA81' and '$(Configuration)' != 'ReleasePortable88' and '$(Configuration)' != 'DebugPortable88' and '$(Configuration)' != 'ReleasePortable36' and '$(Configuration)' != 'DebugPortable36' and '$(Configuration)' != 'ReleasePortable328' and '$(Configuration)' != 'DebugPortable328'" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" Condition="'$(Configuration)' == 'ReleaseCore45' or '$(Configuration)' == 'DebugCore45' or '$(Configuration)' == 'ReleaseWPA81' or '$(Configuration)' == 'DebugWPA81'" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" Condition="'$(Configuration)' == 'ReleasePortable88' or '$(Configuration)' == 'DebugPortable88' or '$(Configuration)' == 'ReleasePortable36' or '$(Configuration)' == 'DebugPortable36' or '$(Configuration)' == 'ReleasePortable328' or '$(Configuration)' == 'DebugPortable328'" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
-    <releaseNotes>Windows Phone 7.1 and higher (both Silverlight and Store) support added.</releaseNotes>
+    <releaseNotes>Portable class library support added.</releaseNotes>
     <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>
@@ -25,5 +25,8 @@
     <file src="bin\ReleaseWP8\*.*" target="lib\wp8" />
     <file src="bin\ReleaseWPA81\*.*" target="lib\wpa" />
     <file src="bin\ReleaseCore45\*.*" target="lib\windows8" />
+    <file src="bin\ReleasePortable36\*.*" target="lib\portable-net4+sl4+netcore45+wp8" />
+    <file src="bin\ReleasePortable88\*.*" target="lib\portable-net4+sl4+netcore45+wp71" />
+    <file src="bin\ReleasePortable328\*.*" target="lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1" />
   </files>
 </package>

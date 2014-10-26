@@ -531,7 +531,7 @@ namespace Mindbox.Expressions.Tests
 							expression => expression.Evaluate())))
 					Assert.Fail("The expression body has evaluation: \"{0}\".", node);
 				if ((method.DeclaringType != null) && 
-#if NET35 || SL3 || WINDOWS_PHONE
+#if NET35 || SL3 || WINDOWS_PHONE || PORTABLE36 || PORTABLE88 || PORTABLE328
 						(method.DeclaringType.BaseType == 
 #else
 						(method.DeclaringType.GetTypeInfo().BaseType ==
@@ -582,7 +582,7 @@ namespace Mindbox.Expressions.Tests
 			private readonly List<ParameterExpression> parameters = new List<ParameterExpression>();
 
 
-#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP || PORTABLE36 || PORTABLE328
 			protected override Expression VisitLambda<T>(Expression<T> node)
 			{
 				if (node == null)

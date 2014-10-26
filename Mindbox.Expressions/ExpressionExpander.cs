@@ -24,7 +24,7 @@ namespace Mindbox.Expressions
 #endif
 
 		private static readonly MethodInfo DelegateCreateDelegateMethod =
-#if NET35 || SL3 || WINDOWS_PHONE
+#if NET35 || SL3 || WINDOWS_PHONE || PORTABLE36 || PORTABLE88 || PORTABLE328
 			ReflectionExpressions.GetMethodInfo(() => 
 				Delegate.CreateDelegate(default(Type), default(object), default(MethodInfo)));
 #else
@@ -132,7 +132,7 @@ namespace Mindbox.Expressions
 			}
 
 			if ((baseResult.Method.DeclaringType != null) &&
-#if NET35 || SL3 || WINDOWS_PHONE
+#if NET35 || SL3 || WINDOWS_PHONE || PORTABLE36 || PORTABLE88 || PORTABLE328
 				(baseResult.Method.DeclaringType.BaseType ==
 #else
 				(baseResult.Method.DeclaringType.GetTypeInfo().BaseType ==

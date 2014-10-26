@@ -54,7 +54,7 @@ namespace Mindbox.Expressions.Tests
 			Assert.AreEqual(30, f1.Evaluate(1, 2, 3, 4));
 		}
 
-#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP || PORTABLE36 || PORTABLE328
 		[TestMethod]
 		public void Evaluate5ArgumentsTest()
 		{

@@ -34,7 +34,7 @@ namespace Mindbox.Expressions
 			return base.VisitParameter(node);
 		}
 
-#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP || PORTABLE36 || PORTABLE328
 		protected override Expression VisitLambda<T>(Expression<T> node)
 		{
 			if (node == null)

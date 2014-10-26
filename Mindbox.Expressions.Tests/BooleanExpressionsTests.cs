@@ -124,7 +124,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
-#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP || PORTABLE36 || PORTABLE328
 		[TestMethod]
 		public void AndAlso5ParameterTest()
 		{
@@ -534,7 +534,7 @@ namespace Mindbox.Expressions.Tests
 			}
 		}
 
-#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP
+#if NET40 || SL4 || CORE45 || WP8 || WINDOWS_PHONE_APP || PORTABLE36 || PORTABLE328
 		[TestMethod]
 		public void OrElse5ParameterTest()
 		{
