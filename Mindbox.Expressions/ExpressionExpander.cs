@@ -66,8 +66,14 @@ namespace Mindbox.Expressions
 			if (expression == null)
 				throw new ArgumentNullException("expression");
 
-			object value;
-			return ExpressionEvaluator.Instance.TryEvaluate(expression, out value) ? (LambdaExpression)value : null;
+			if (expression.NodeType == ExpressionType.Quote)
+				return (LambdaExpression)((UnaryExpression)expression).Operand;
+
+			if (ExpressionParameterPresenceDetector.DoesExpressionHaveParameters(expression))
+				return null;
+
+			// Testing showed that evaluation via compilation works faster and the result is GCed.
+			return (LambdaExpression)Expression.Lambda(expression).Compile().DynamicInvoke();
 		}
 
 		private static bool IsEvaluateMethod(MethodInfo method)

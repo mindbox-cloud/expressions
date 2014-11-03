@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <projectUrl>https://github.com/mindbox-moscow/expressions/wiki</projectUrl>
-    <releaseNotes>Portable class library support added.</releaseNotes>
+    <releaseNotes>ExpressionEvaluator removed. (Testing shown that it's useless.)</releaseNotes>
     <copyright>Copyright 2014 Mindbox</copyright>
     <tags>expressions linq lambda reflection iqueryable entityframework ef nhibernate</tags>
   </metadata>

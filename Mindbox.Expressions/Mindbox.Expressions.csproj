@@ -359,7 +359,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanExpressions.cs" />
-    <Compile Include="ExpressionEvaluator.cs" />
     <Compile Include="ExpressionExpander.cs" />
     <Compile Include="ExpressionParameterPresenceDetector.cs" />
     <Compile Include="ExpressionParameterSubstitutor.cs" />

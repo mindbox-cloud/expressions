@@ -449,7 +449,6 @@
     <Compile Include="BooleanExpressionsTests.cs" />
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="ExpandExpressionTests.cs" />
-    <Compile Include="ExpressionEvaluatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExpressionsTests.cs" />
   </ItemGroup>
