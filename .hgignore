@@ -3,3 +3,5 @@ syntax: glob
 obj
 bin
 .git
+TestResults
+packages
