@@ -66,7 +66,6 @@ namespace Mindbox.Expressions.Tests
 			Assert.AreEqual("Method5", result.Name);
 		}
 
-
 		[TestMethod]
 		public void TryGetPropertyNameTest()
 		{
@@ -94,6 +93,71 @@ namespace Mindbox.Expressions.Tests
 			Assert.AreEqual("y", ReflectionExpressions.TryGetFieldName(expression));
 		}
 
+		[TestMethod]
+		public void TryGetMethodNameNullTest1()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetMethodName((Expression<Func<object, object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetMethodNameNullTest2()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetMethodName((Expression<Action<object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetMethodNameNullTest3()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetMethodName((Expression<Func<object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetMethodNameNullTest4()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetMethodName((Expression<Action>)null));
+		}
+
+		[TestMethod]
+		public void TryGetMethodNameNullTest5()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetMethodName((LambdaExpression)null));
+		}
+
+		[TestMethod]
+		public void TryGetPropertyNameNullTest1()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetPropertyName((Expression<Func<object, object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetPropertyNameNullTest2()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetPropertyName((Expression<Func<object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetPropertyNameNullTest3()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetPropertyName((LambdaExpression)null));
+		}
+
+		[TestMethod]
+		public void TryGetFieldNameNullTest1()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetFieldName((Expression<Func<object, object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetFieldNameNullTest2()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetFieldName((Expression<Func<object>>)null));
+		}
+
+		[TestMethod]
+		public void TryGetFieldNameNullTest3()
+		{
+			Assert.IsNull(ReflectionExpressions.TryGetFieldName((LambdaExpression)null));
+		}
 
 
 		// When using interface and new() generic constraints, expression contains Convert to the interface.

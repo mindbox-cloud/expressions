@@ -86,6 +86,9 @@ namespace Mindbox.Expressions
 
 		private static bool IsCompileMethod(MethodInfo method)
 		{
+			if (method == null)
+				throw new ArgumentNullException("method");
+
 			return (method.DeclaringType != null) &&
 #if NET45 || CORE45 || WINDOWS_PHONE_APP
 				method.DeclaringType.IsConstructedGenericType &&

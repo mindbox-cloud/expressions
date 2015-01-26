@@ -174,9 +174,6 @@ namespace Mindbox.Expressions
 		/// <returns>Method name or null (if the expression is not a method call expression).</returns>
 		public static string TryGetMethodName<TObject>(Expression<Func<TObject, object>> callExpression)
 		{
-			if (callExpression == null)
-				throw new ArgumentNullException("callExpression");
-
 			return TryGetMethodName((LambdaExpression)callExpression);
 		}
 
@@ -189,9 +186,6 @@ namespace Mindbox.Expressions
 		/// <returns>Method name or null (if the expression is not a method call expression).</returns>
 		public static string TryGetMethodName<TObject>(Expression<Action<TObject>> callExpression)
 		{
-			if (callExpression == null)
-				throw new ArgumentNullException("callExpression");
-
 			return TryGetMethodName((LambdaExpression)callExpression);
 		}
 
@@ -203,9 +197,6 @@ namespace Mindbox.Expressions
 		/// <returns>Method name or null (if the expression is not a method call expression).</returns>
 		public static string TryGetMethodName(Expression<Func<object>> callExpression)
 		{
-			if (callExpression == null)
-				throw new ArgumentNullException("callExpression");
-
 			return TryGetMethodName((LambdaExpression)callExpression);
 		}
 
@@ -217,9 +208,6 @@ namespace Mindbox.Expressions
 		/// <returns>Method name or null (if the expression is not a method call expression).</returns>
 		public static string TryGetMethodName(Expression<Action> callExpression)
 		{
-			if (callExpression == null)
-				throw new ArgumentNullException("callExpression");
-
 			return TryGetMethodName((LambdaExpression)callExpression);
 		}
 
@@ -231,9 +219,6 @@ namespace Mindbox.Expressions
 		/// <returns>Method name or null (if the expression is not a method call expression).</returns>
 		public static string TryGetMethodName(LambdaExpression callExpression)
 		{
-			if (callExpression == null)
-				throw new ArgumentNullException("callExpression");
-
 			var methodInfo = TryGetMethodInfo(callExpression);
 			return methodInfo == null ? null : methodInfo.Name;
 		}
@@ -458,9 +443,6 @@ namespace Mindbox.Expressions
 		/// <returns>Property name or null (if the expression is not a property access expression).</returns>
 		public static string TryGetPropertyName<TObject>(Expression<Func<TObject, object>> propertyExpression)
 		{
-			if (propertyExpression == null)
-				throw new ArgumentNullException("propertyExpression");
-
 			return TryGetPropertyName((LambdaExpression)propertyExpression);
 		}
 
@@ -473,9 +455,6 @@ namespace Mindbox.Expressions
 		/// <returns>Property name or null (if the expression is not a property access expression).</returns>
 		public static string TryGetPropertyName(Expression<Func<object>> propertyExpression)
 		{
-			if (propertyExpression == null)
-				throw new ArgumentNullException("propertyExpression");
-
 			return TryGetPropertyName((LambdaExpression)propertyExpression);
 		}
 
@@ -488,9 +467,6 @@ namespace Mindbox.Expressions
 		/// <returns>Property name or null (if the expression is not a property access expression).</returns>
 		public static string TryGetPropertyName(LambdaExpression propertyExpression)
 		{
-			if (propertyExpression == null)
-				throw new ArgumentNullException("propertyExpression");
-
 			var propertyInfo = TryGetPropertyInfo(propertyExpression);
 			return propertyInfo == null ? null : propertyInfo.Name;
 		}
@@ -651,9 +627,6 @@ namespace Mindbox.Expressions
 		/// <returns>Field name or null (if the expression is not a field access expression).</returns>
 		public static string TryGetFieldName<TObject>(Expression<Func<TObject, object>> fieldExpression)
 		{
-			if (fieldExpression == null)
-				throw new ArgumentNullException("fieldExpression");
-
 			return TryGetFieldName((LambdaExpression)fieldExpression);
 		}
 
@@ -665,9 +638,6 @@ namespace Mindbox.Expressions
 		/// <returns>Field name or null (if the expression is not a field access expression).</returns>
 		public static string TryGetFieldName(Expression<Func<object>> fieldExpression)
 		{
-			if (fieldExpression == null)
-				throw new ArgumentNullException("fieldExpression");
-
 			return TryGetFieldName((LambdaExpression)fieldExpression);
 		}
 
@@ -679,9 +649,6 @@ namespace Mindbox.Expressions
 		/// <returns>Field name or null (if the expression is not a field access expression).</returns>
 		public static string TryGetFieldName(LambdaExpression fieldExpression)
 		{
-			if (fieldExpression == null)
-				throw new ArgumentNullException("fieldExpression");
-
 			var fieldInfo = TryGetFieldInfo(fieldExpression);
 			return fieldInfo == null ? null : fieldInfo.Name;
 		}

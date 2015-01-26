@@ -116,6 +116,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual MemberBinding VisitBinding(MemberBinding binding)
 		{
+			if (binding == null)
+				throw new ArgumentNullException("binding");
+
 			switch (binding.BindingType)
 			{
 				case MemberBindingType.Assignment:
@@ -140,6 +143,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual ElementInit VisitElementInitializer(ElementInit initializer)
 		{
+			if (initializer == null)
+				throw new ArgumentNullException("initializer");
+
 			var arguments = VisitExpressionList(initializer.Arguments);
 			return arguments == initializer.Arguments ? initializer : Expression.ElementInit(initializer.AddMethod, arguments);
 		}
@@ -152,6 +158,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitUnary(UnaryExpression u)
 		{
+			if (u == null)
+				throw new ArgumentNullException("u");
+
 			var operand = Visit(u.Operand);
 			return operand == u.Operand ? u : Expression.MakeUnary(u.NodeType, operand, u.Type, u.Method);
 		}
@@ -164,6 +173,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitBinary(BinaryExpression b)
 		{
+			if (b == null)
+				throw new ArgumentNullException("b");
+
 			var left = Visit(b.Left);
 			var right = Visit(b.Right);
 			var conversion = Visit(b.Conversion);
@@ -182,6 +194,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitTypeIs(TypeBinaryExpression b)
 		{
+			if (b == null)
+				throw new ArgumentNullException("b");
+
 			var expr = Visit(b.Expression);
 			return expr == b.Expression ? b : Expression.TypeIs(expr, b.TypeOperand);
 		}
@@ -194,6 +209,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitConstant(ConstantExpression c)
 		{
+			if (c == null)
+				throw new ArgumentNullException("c");
+
 			return c;
 		}
 
@@ -205,6 +223,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitConditional(ConditionalExpression c)
 		{
+			if (c == null)
+				throw new ArgumentNullException("c");
+
 			var test = Visit(c.Test);
 			var ifTrue = Visit(c.IfTrue);
 			var ifFalse = Visit(c.IfFalse);
@@ -219,6 +240,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitParameter(ParameterExpression p)
 		{
+			if (p == null)
+				throw new ArgumentNullException("p");
+
 			return p;
 		}
 
@@ -230,6 +254,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitMemberAccess(MemberExpression m)
 		{
+			if (m == null)
+				throw new ArgumentNullException("m");
+
 			var exp = Visit(m.Expression);
 			return exp == m.Expression ? m : Expression.MakeMemberAccess(exp, m.Member);
 		}
@@ -242,6 +269,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitMethodCall(MethodCallExpression m)
 		{
+			if (m == null)
+				throw new ArgumentNullException("m");
+
 			var obj = Visit(m.Object);
 			var args = VisitExpressionList(m.Arguments);
 			return obj == m.Object && args == m.Arguments ? m : Expression.Call(obj, m.Method, args);
@@ -255,6 +285,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression list.</returns>
 		protected virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
 		{
+			if (original == null)
+				throw new ArgumentNullException("original");
+
 			List<Expression> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
 			{
@@ -284,6 +317,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual MemberAssignment VisitMemberAssignment(MemberAssignment assignment)
 		{
+			if (assignment == null)
+				throw new ArgumentNullException("assignment");
+
 			var e = Visit(assignment.Expression);
 			return e == assignment.Expression ? assignment : Expression.Bind(assignment.Member, e);
 		}
@@ -296,6 +332,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual MemberMemberBinding VisitMemberMemberBinding(MemberMemberBinding binding)
 		{
+			if (binding == null)
+				throw new ArgumentNullException("binding");
+
 			var bindings = VisitBindingList(binding.Bindings);
 			return bindings == binding.Bindings ? binding : Expression.MemberBind(binding.Member, bindings);
 		}
@@ -308,6 +347,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
 		{
+			if (binding == null)
+				throw new ArgumentNullException("binding");
+
 			var initializers = VisitElementInitializerList(binding.Initializers);
 			return initializers == binding.Initializers ? binding : Expression.ListBind(binding.Member, initializers);
 		}
@@ -320,6 +362,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original node list.</returns>
 		protected virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original)
 		{
+			if (original == null)
+				throw new ArgumentNullException("original");
+
 			List<MemberBinding> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
 			{
@@ -351,6 +396,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original node list.</returns>
 		protected virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original)
 		{
+			if (original == null)
+				throw new ArgumentNullException("original");
+
 			List<ElementInit> list = null;
 			for (int i = 0, n = original.Count; i < n; i++)
 			{
@@ -382,6 +430,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitLambda(LambdaExpression lambda)
 		{
+			if (lambda == null)
+				throw new ArgumentNullException("lambda");
+
 			var body = Visit(lambda.Body);
 			return body == lambda.Body ? lambda : Expression.Lambda(lambda.Type, body, lambda.Parameters);
 		}
@@ -394,6 +445,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual NewExpression VisitNew(NewExpression nex)
 		{
+			if (nex == null)
+				throw new ArgumentNullException("nex");
+
 			IEnumerable<Expression> args = VisitExpressionList(nex.Arguments);
 			if (args == nex.Arguments)
 				return nex;
@@ -410,6 +464,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitMemberInit(MemberInitExpression init)
 		{
+			if (init == null)
+				throw new ArgumentNullException("init");
+
 			var n = VisitNew(init.NewExpression);
 			var bindings = VisitBindingList(init.Bindings);
 			if (n == init.NewExpression && bindings == init.Bindings)
@@ -425,6 +482,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitListInit(ListInitExpression init)
 		{
+			if (init == null)
+				throw new ArgumentNullException("init");
+
 			var n = VisitNew(init.NewExpression);
 			var initializers = VisitElementInitializerList(init.Initializers);
 			if (n == init.NewExpression && initializers == init.Initializers)
@@ -440,6 +500,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitNewArray(NewArrayExpression na)
 		{
+			if (na == null)
+				throw new ArgumentNullException("na");
+
 			var exprs = VisitExpressionList(na.Expressions);
 			if (exprs == na.Expressions)
 				return na;
@@ -456,6 +519,9 @@ namespace Mindbox.Expressions
 		/// otherwise, returns the original expression.</returns>
 		protected virtual Expression VisitInvocation(InvocationExpression iv)
 		{
+			if (iv == null)
+				throw new ArgumentNullException("iv");
+
 			var args = VisitExpressionList(iv.Arguments);
 			var expr = Visit(iv.Expression);
 			if (args == iv.Arguments && expr == iv.Expression)

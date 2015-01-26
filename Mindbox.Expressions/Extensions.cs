@@ -54,6 +54,9 @@ namespace Mindbox.Expressions
 		/// <returns>Query rebuilt using expressions with replaced nested expression evaluations.</returns>
 		public static IQueryable<T> ExpandExpressions<T>(this IQueryable<T> query)
 		{
+			if (query == null)
+				throw new ArgumentNullException("query");
+
 			return (IQueryable<T>)query.Provider.CreateQuery(query.Expression.ExpandExpressions());
 		}
 
