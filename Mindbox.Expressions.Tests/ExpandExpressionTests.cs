@@ -442,6 +442,14 @@ namespace Mindbox.Expressions.Tests
 			NoDuplicateParameterAssertion.AssertNoDuplicateParameters(result);
 		}
 
+		[TestMethod]
+		public void QueryableExpressionCanBeExpanded()
+		{
+			Expression<Func<int, IQueryable<int>>> testExpression = t1 => Enumerable.Repeat(1, 1).AsQueryable();
+
+			testExpression = t1 => testExpression.Evaluate(t1).Where(t2 => t2 > 1);
+			testExpression.ExpandExpressions();
+		}
 
 		private static Expression<Func<int, int>> DirtyGetter(int argument)
 		{
