@@ -5,10 +5,19 @@
     <AssemblyName>Mindbox.Expressions</AssemblyName>
     <RootNamespace>Mindbox.Expressions</RootNamespace>
     <PackageId>Mindbox.Expressions</PackageId>
+    <Description>
+      Allows to include lambda expressions into each other in c# and Visual Basic.
+      Also allows to avoid using string constants in reflection thus enabling easy refactoring.
+    </Description>
+    <Version>3.0.0-beta1</Version>
     <Authors>Mindbox</Authors>
     <Company>Mindbox</Company>
-    <AssemblyVersion>3.0</AssemblyVersion>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
     <Copyright>Copyright © Mindbox 2017</Copyright>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 
 </Project>
