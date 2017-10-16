@@ -61,7 +61,7 @@ namespace Mindbox.Expressions
 		}
 
 
-		private static LambdaExpression TryGetLambdaExpressionFromExpression(Expression expression)
+		private static LambdaExpression GetLambdaExpressionFromExpression(Expression expression)
 		{
 			if (expression == null)
 				throw new ArgumentNullException("expression");
@@ -173,7 +173,7 @@ namespace Mindbox.Expressions
 				var constantExpression = (ConstantExpression)baseResult.Object;
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
-					var innerExpression = TryGetLambdaExpressionFromExpression(baseResult.Arguments[1]);
+					var innerExpression = GetLambdaExpressionFromExpression(baseResult.Arguments[1]);
 					if (innerExpression != null)
 						return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
 							innerExpression,
@@ -187,7 +187,7 @@ namespace Mindbox.Expressions
 				var constantExpression = (ConstantExpression)baseResult.Arguments[2];
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
-					var innerExpression = TryGetLambdaExpressionFromExpression(baseResult.Arguments[1]);
+					var innerExpression = GetLambdaExpressionFromExpression(baseResult.Arguments[1]);
 					if (innerExpression != null)
 						return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
 							innerExpression,
@@ -232,7 +232,7 @@ namespace Mindbox.Expressions
 			if (arguments == null)
 				throw new ArgumentNullException("arguments");
 
-			var lambdaExpression = TryGetLambdaExpressionFromExpression(expressionExpression);
+			var lambdaExpression = GetLambdaExpressionFromExpression(expressionExpression);
 			if (lambdaExpression != null)
 			{
 				if (lambdaExpression.Parameters.Count != arguments.Count)
