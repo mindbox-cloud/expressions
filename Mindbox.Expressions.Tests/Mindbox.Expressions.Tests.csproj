@@ -446,6 +446,7 @@
     <Reference Include="system" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertException.cs" />
     <Compile Include="BooleanExpressionsTests.cs" />
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="ExpandExpressionTests.cs" />

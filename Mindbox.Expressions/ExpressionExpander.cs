@@ -70,10 +70,17 @@ namespace Mindbox.Expressions
 				return (LambdaExpression)((UnaryExpression)expression).Operand;
 
 			if (ExpressionParameterPresenceDetector.DoesExpressionHaveParameters(expression))
-				return null;
+				throw new InvalidOperationException(
+					"Expression isn't expandable due to usage of " +
+					$"{nameof(Extensions.Evaluate)} or {nameof(LambdaExpression.Compile)} on expression, " +
+					"that can't be obtained because it depends on outer lambda expression parameter.");
 
 			// Testing showed that evaluation via compilation works faster and the result is GCed.
-			return (LambdaExpression)Expression.Lambda(expression).Compile().DynamicInvoke();
+			var result = (LambdaExpression) Expression.Lambda(expression).Compile().DynamicInvoke();
+			if (result == null)
+				throw new InvalidOperationException($"Usage of {nameof(Extensions.Evaluate)} on null expression is invalid");
+
+			return result;
 		}
 
 		private static bool IsEvaluateMethod(MethodInfo method)

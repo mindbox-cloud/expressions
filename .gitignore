@@ -3,3 +3,4 @@ syntax: glob
 bin
 obj
 *.suo
+/.vs/Mindbox.Expressions/v15/sqlite3/storage.ide
