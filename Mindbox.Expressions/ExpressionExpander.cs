@@ -124,9 +124,7 @@ namespace Mindbox.Expressions
 
 				if (IsCompileMethod(methodCallExpression.Method))
 				{
-					Expression result;
-					if (TrySubstituteExpression(methodCallExpression.Object, baseResult.Arguments, out result))
-						return result;
+					return SubstituteExpression(methodCallExpression.Object, baseResult.Arguments);
 				}
 			}
 
@@ -142,9 +140,7 @@ namespace Mindbox.Expressions
 
 			if (IsEvaluateMethod(baseResult.Method))
 			{
-				Expression result;
-				if (TrySubstituteExpression(baseResult.Arguments[0], baseResult.Arguments.Skip(1).ToList(), out result))
-					return result;
+				return SubstituteExpression(baseResult.Arguments[0], baseResult.Arguments.Skip(1).ToList());
 			}
 
 			if ((baseResult.Method.DeclaringType != null) &&
@@ -162,9 +158,7 @@ namespace Mindbox.Expressions
 
 				if (IsCompileMethod(methodCallExpression.Method))
 				{
-					Expression result;
-					if (TrySubstituteExpression(methodCallExpression.Object, baseResult.Arguments, out result))
-						return result;
+					return SubstituteExpression(methodCallExpression.Object, baseResult.Arguments);
 				}
 			}
 
@@ -174,10 +168,12 @@ namespace Mindbox.Expressions
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
 					var innerExpression = GetLambdaExpressionFromExpression(baseResult.Arguments[1]);
-					if (innerExpression != null)
-						return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
-							innerExpression,
-							new Dictionary<ParameterExpression, Expression>()));
+					if (innerExpression == null)
+						throw new InvalidOperationException("innerExpression == null");
+
+					return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
+						innerExpression,
+						new Dictionary<ParameterExpression, Expression>()));
 				}
 			}
 
@@ -188,10 +184,12 @@ namespace Mindbox.Expressions
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
 					var innerExpression = GetLambdaExpressionFromExpression(baseResult.Arguments[1]);
-					if (innerExpression != null)
-						return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
-							innerExpression,
-							new Dictionary<ParameterExpression, Expression>()));
+					if (innerExpression == null)
+						throw new InvalidOperationException("innerExpression == null");
+
+					return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
+						innerExpression,
+						new Dictionary<ParameterExpression, Expression>()));
 				}
 			}
 
@@ -217,15 +215,14 @@ namespace Mindbox.Expressions
 			return baseResult;
 		}
 
-
-		private bool TrySubstituteExpression(
+		private Expression SubstituteExpression(
 			Expression expressionExpression, 
 #if NET45 || CORE45 || WINDOWS_PHONE_APP
 			IReadOnlyList<Expression> arguments,
 #else
-			IList<Expression> arguments, 
+			IList<Expression> arguments
 #endif
-			out Expression result)
+			)
 		{
 			if (expressionExpression == null)
 				throw new ArgumentNullException("expressionExpression");
@@ -233,31 +230,27 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("arguments");
 
 			var lambdaExpression = GetLambdaExpressionFromExpression(expressionExpression);
-			if (lambdaExpression != null)
+			if (lambdaExpression == null)
+				throw new InvalidOperationException("lambdaExpression == null");
+
+			if (lambdaExpression.Parameters.Count != arguments.Count)
+				throw new ArgumentException("Argument count doesn't match parameter count.");
+
+			var visitedLambdaExpression = (LambdaExpression)Visit(lambdaExpression);
+
+			var parameterSubstitutions = new Dictionary<ParameterExpression, Expression>();
+			for (var parameterIndex = 0;
+				parameterIndex < visitedLambdaExpression.Parameters.Count;
+				parameterIndex++)
 			{
-				if (lambdaExpression.Parameters.Count != arguments.Count)
-					throw new ArgumentException("Argument count doesn't match parameter count.");
-
-				var visitedLambdaExpression = (LambdaExpression)Visit(lambdaExpression);
-
-				var parameterSubstitutions = new Dictionary<ParameterExpression, Expression>();
-				for (var parameterIndex = 0;
-					parameterIndex < visitedLambdaExpression.Parameters.Count;
-					parameterIndex++)
-				{
-					var originalParameter = visitedLambdaExpression.Parameters[parameterIndex];
-					var replacedParameter = arguments[parameterIndex];
-					parameterSubstitutions.Add(originalParameter, replacedParameter);
-				}
-
-				result = Visit(ExpressionParameterSubstitutor.SubstituteParameters(
-					visitedLambdaExpression.Body,
-					parameterSubstitutions));
-				return true;
+				var originalParameter = visitedLambdaExpression.Parameters[parameterIndex];
+				var replacedParameter = arguments[parameterIndex];
+				parameterSubstitutions.Add(originalParameter, replacedParameter);
 			}
 
-			result = default(Expression);
-			return false;
+			return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
+				visitedLambdaExpression.Body,
+				parameterSubstitutions));
 		}
 	}
 }
