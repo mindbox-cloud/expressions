@@ -218,7 +218,7 @@ namespace Mindbox.Expressions
 		private Expression SubstituteExpression(
 			Expression expressionExpression, 
 #if NET45 || CORE45 || WINDOWS_PHONE_APP
-			IReadOnlyList<Expression> arguments,
+			IReadOnlyList<Expression> arguments
 #else
 			IList<Expression> arguments
 #endif
