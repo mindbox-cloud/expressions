@@ -168,8 +168,6 @@ namespace Mindbox.Expressions
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
 					var innerExpression = GetLambdaExpressionFromExpression(baseResult.Arguments[1]);
-					if (innerExpression == null)
-						throw new InvalidOperationException("innerExpression == null");
 
 					return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
 						innerExpression,
@@ -184,8 +182,6 @@ namespace Mindbox.Expressions
 				if (IsEvaluateMethod((MethodInfo)constantExpression.Value))
 				{
 					var innerExpression = GetLambdaExpressionFromExpression(baseResult.Arguments[1]);
-					if (innerExpression == null)
-						throw new InvalidOperationException("innerExpression == null");
 
 					return Visit(ExpressionParameterSubstitutor.SubstituteParameters(
 						innerExpression,
@@ -230,8 +226,6 @@ namespace Mindbox.Expressions
 				throw new ArgumentNullException("arguments");
 
 			var lambdaExpression = GetLambdaExpressionFromExpression(expressionExpression);
-			if (lambdaExpression == null)
-				throw new InvalidOperationException("lambdaExpression == null");
 
 			if (lambdaExpression.Parameters.Count != arguments.Count)
 				throw new ArgumentException("Argument count doesn't match parameter count.");
