@@ -185,6 +185,22 @@ namespace Mindbox.Expressions.Tests
 		}
 
 		[TestMethod]
+		public void ExpandExpressions_EvaluateOnNull_Exception()
+		{
+			Expression<Func<int, int>> f1 = null;
+			Expression<Func<int, int>> f2 = z => f1.Evaluate(z);
+
+			AssertException.Throws<InvalidOperationException>(
+				() => f2.ExpandExpressions(),
+				ex =>
+				{
+					Assert.AreEqual(
+						$"Usage of {nameof(Extensions.Evaluate)} on null expression is invalid", 
+						ex.Message);
+				});
+		}
+
+		[TestMethod]
 		public void ExpandExpressionsVeryComplexTest()
 		{
 			Expression<Func<int, Expression<Func<int, int>>>> f1 = x => (y => y + x);
@@ -383,11 +399,16 @@ namespace Mindbox.Expressions.Tests
 
 			Assert.AreEqual(8, f2.Compile()(1));
 
-			var result = f2.ExpandExpressions();
-
-			NoDuplicateParameterAssertion.AssertNoDuplicateParameters(result);
-			Assert.AreEqual(8, result.Compile()(1));
-			// The result will have Compile calls cause DirtyGetter(z) cannot be expanded
+			AssertException.Throws<InvalidOperationException>(
+				() => f2.ExpandExpressions(),
+				ex =>
+				{
+					Assert.AreEqual(
+						"Expression isn't expandable due to usage of " +
+						$"{nameof(Extensions.Evaluate)} or {nameof(LambdaExpression.Compile)} on expression, " +
+						"that can't be obtained because it depends on outer lambda expression parameter.",
+						ex.Message);
+				});
 		}
 
 		[TestMethod]
@@ -399,11 +420,16 @@ namespace Mindbox.Expressions.Tests
 
 			Assert.AreEqual(8, f2.Evaluate(1));
 
-			var result = f2.ExpandExpressions();
-
-			NoDuplicateParameterAssertion.AssertNoDuplicateParameters(result);
-			Assert.AreEqual(8, result.Evaluate(1));
-			// The result will have Evaluate calls cause DirtyGetter(z) cannot be expanded
+			AssertException.Throws<InvalidOperationException>(
+				() => f2.ExpandExpressions(),
+				ex =>
+				{
+					Assert.AreEqual(
+						"Expression isn't expandable due to usage of " +
+						$"{nameof(Extensions.Evaluate)} or {nameof(LambdaExpression.Compile)} on expression, " +
+						"that can't be obtained because it depends on outer lambda expression parameter.",
+						ex.Message);
+				});
 		}
 
 		[TestMethod]
