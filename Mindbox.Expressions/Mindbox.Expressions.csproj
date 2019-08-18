@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <Company>Mindbox</Company>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
     <Product>Mindbox.Expressions</Product>
     <Description>Allows to include lambda expressions into each other in c# and Visual Basic. Also allows to avoid using string constants in reflection thus enabling easy refactoring.</Description>
     <Copyright>Mindbox 2018</Copyright>
