@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Mindbox.Expressions
 {
-	internal sealed class ExpressionParameterPresenceDetector : ExpressionVisitor
+	public sealed class ExpressionParameterPresenceDetector : ExpressionVisitor
 	{
 		public static bool DoesExpressionHaveParameters(Expression expression)
 		{
