@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -75,8 +76,7 @@ namespace Mindbox.Expressions
 					$"{nameof(Extensions.Evaluate)} or {nameof(LambdaExpression.Compile)} on expression, " +
 					"that can't be obtained because it depends on outer lambda expression parameter.");
 
-			// Testing showed that evaluation via compilation works faster and the result is GCed.
-			var result = (LambdaExpression) Expression.Lambda(expression).Compile().DynamicInvoke();
+			var result = (LambdaExpression)ExpressionsConfiguration.ExpressionEvaluatorFactory().Evaluate(expression);
 			if (result == null)
 				throw new InvalidOperationException($"Usage of {nameof(Extensions.Evaluate)} on null expression is invalid");
 
