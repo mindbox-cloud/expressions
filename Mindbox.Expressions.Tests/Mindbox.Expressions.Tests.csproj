@@ -51,6 +51,7 @@
     <Compile Include="AssertException.cs" />
     <Compile Include="BooleanExpressionsTests.cs" />
     <Compile Include="EvaluateTests.cs" />
+    <Compile Include="EvaluationScopeTests.cs" />
     <Compile Include="ExpandExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExpressionsTests.cs" />

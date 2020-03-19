@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -75,12 +76,45 @@ namespace Mindbox.Expressions
 					$"{nameof(Extensions.Evaluate)} or {nameof(LambdaExpression.Compile)} on expression, " +
 					"that can't be obtained because it depends on outer lambda expression parameter.");
 
-			// Testing showed that evaluation via compilation works faster and the result is GCed.
-			var result = (LambdaExpression) Expression.Lambda(expression).Compile().DynamicInvoke();
+			var result = (LambdaExpression)ExpressionsConfiguration.ExpressionEvaluatorFactory().Evaluate(expression);
 			if (result == null)
 				throw new InvalidOperationException($"Usage of {nameof(Extensions.Evaluate)} on null expression is invalid");
 
 			return result;
+		}
+
+		private static LambdaExpression GetActualExpressionViaCompilation(Expression expression)
+		{
+			//var sw = Stopwatch.StartNew();
+
+			var result = (LambdaExpression) Expression.Lambda(expression).Compile()
+				.DynamicInvoke();
+			//var elapsed = sw.ElapsedMilliseconds;
+			return result;
+		}
+
+		private static LambdaExpression GetActualExpressionFast(Expression expression)
+		{
+			return (LambdaExpression) DynamicEvaluate(expression);
+		}
+
+		private static object DynamicEvaluate(Expression expression)
+		{
+			var interpretationResult = EvaluationScope.Empty.TryEvaluate(expression);
+			return interpretationResult.IsImpossible
+				? GetActualExpressionWithLogging(expression)
+				: interpretationResult.Value;
+		}
+
+		private static LambdaExpression GetActualExpressionWithLogging(Expression expression)
+		{
+			lock (typeof(ExpressionExpander))
+			{
+				System.IO.File.AppendAllLines(
+					"C:/Repo/expressions-output.txt", new [] { expression.GetType().Name + expression });
+			}
+
+			return GetActualExpressionViaCompilation(expression);
 		}
 
 		private static bool IsEvaluateMethod(MethodInfo method)
