@@ -15,6 +15,13 @@ namespace Mindbox.Expressions.Tests
 	[TestClass]
 	public class ExpandExpressionTests
 	{
+		[TestInitialize]
+		public void Initialize()
+		{
+			ExpressionsConfiguration.ExpressionEvaluatorFactory =
+				() => InterpretingExpressionEvaluator.Instance;
+		}
+
 		[TestMethod]
 		public void ExpandExpressionsSimpleTest()
 		{
