@@ -6,10 +6,7 @@ namespace Mindbox.Expressions
 	{
 		public object Evaluate(Expression expression)
 		{
-			var interpretationResult = EvaluationScope.Empty.TryEvaluate(expression);
-			return interpretationResult.IsImpossible
-				? CompilingExpressionEvaluator.Instance.Evaluate(expression)
-				: interpretationResult.Value;
+			return EvaluationScope.Empty.TryEvaluate(expression);
 		}
 
 		public static InterpretingExpressionEvaluator Instance { get; } = new InterpretingExpressionEvaluator();

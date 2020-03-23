@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -41,7 +40,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(constantExpression);
 
-			Assert.AreEqual(1, result.Value);
+			Assert.AreEqual(1, result);
 		}
 
 		[TestMethod]
@@ -51,7 +50,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual((byte)2, result.Value);
+			Assert.AreEqual((byte)2, result);
 		}
 
 		[TestMethod]
@@ -61,7 +60,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual((short)4, result.Value);
+			Assert.AreEqual((short)4, result);
 		}
 
 		[TestMethod]
@@ -71,7 +70,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual(8, result.Value);
+			Assert.AreEqual(8, result);
 		}
 
 		[TestMethod]
@@ -81,7 +80,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual(16L, result.Value);
+			Assert.AreEqual(16L, result);
 		}
 
 		[TestMethod]
@@ -91,7 +90,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual(14L, result.Value);
+			Assert.AreEqual(14L, result);
 		}
 
 		[TestMethod]
@@ -101,7 +100,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual(20L, result.Value);
+			Assert.AreEqual(20L, result);
 		}
 
 		[TestMethod]
@@ -113,7 +112,7 @@ namespace Mindbox.Expressions.Tests
 
 			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
 
-			Assert.AreEqual(3, result.Value);
+			Assert.AreEqual(3, result);
 		}
 	}
 }

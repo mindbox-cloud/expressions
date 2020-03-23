@@ -8,7 +8,7 @@ namespace Mindbox.Expressions
 	{
 		public static EvaluationScope Empty { get; } = new EvaluationScope();
 
-		public EvaluationResult TryEvaluate(Expression expression)
+		public object TryEvaluate(Expression expression)
 		{
 			switch (expression)
 			{
@@ -18,34 +18,24 @@ namespace Mindbox.Expressions
 					switch (memberExpression.Member)
 					{
 						case FieldInfo fieldInfo when fieldInfo.IsStatic:
-							return EvaluationResult.Of(fieldInfo.GetValue(null));
+							return fieldInfo.GetValue(null);
 						case FieldInfo fieldInfo:
-						{
-							var target = TryEvaluate(memberExpression.Expression);
-							return target.IsImpossible
-								? EvaluationResult.Impossible
-								: EvaluationResult.Of(fieldInfo.GetValue(target.Value));
-						}
+							return fieldInfo.GetValue(TryEvaluate(memberExpression.Expression));
 						case PropertyInfo propertyInfo when propertyInfo.GetMethod.IsStatic:
-							return EvaluationResult.Of(propertyInfo.GetValue(null));
+							return propertyInfo.GetValue(null);
 						case PropertyInfo propertyInfo:
-						{
-							var target = TryEvaluate(memberExpression.Expression);
-							return target.IsImpossible
-								? EvaluationResult.Impossible
-								: EvaluationResult.Of(propertyInfo.GetValue(target.Value));
-						}
+							return propertyInfo.GetValue(TryEvaluate(memberExpression.Expression));
 					}
 
 					break;
 				case ConstantExpression constantExpression:
-					return EvaluationResult.Of(constantExpression.Value);
+					return constantExpression.Value;
 			}
 
-			return EvaluationResult.Impossible;
+			return CachingCompilingExpressionEvaluator.Instance.Evaluate(expression);
 		}
 
-		private EvaluationResult EvaluateMethod(MethodCallExpression methodCallExpression)
+		private object EvaluateMethod(MethodCallExpression methodCallExpression)
 		{
 			var argumentsCount = methodCallExpression.Arguments.Count;
 			var arguments = argumentsCount == 0 ? Array.Empty<object>() : new object[argumentsCount];
@@ -54,19 +44,15 @@ namespace Mindbox.Expressions
 			{
 				var argument = methodCallExpression.Arguments[index];
 				var argumentValue = TryEvaluate(argument);
-				if (argumentValue.IsImpossible)
-					return EvaluationResult.Impossible;
 
-				arguments[index] = argumentValue.Value;
+				arguments[index] = argumentValue;
 			}
 
 			if (methodCallExpression.Method.IsStatic)
-				return EvaluationResult.Of(methodCallExpression.Method.Invoke(null, arguments));
+				return methodCallExpression.Method.Invoke(null, arguments);
 
 			var target = TryEvaluate(methodCallExpression.Object);
-			return target.IsImpossible
-				? EvaluationResult.Impossible
-				: EvaluationResult.Of(methodCallExpression.Method.Invoke(target.Value, arguments));
+			return methodCallExpression.Method.Invoke(target, arguments);
 		}
 	}
 }
