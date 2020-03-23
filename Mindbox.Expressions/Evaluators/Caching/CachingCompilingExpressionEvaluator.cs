@@ -22,6 +22,7 @@ namespace Mindbox.Expressions
 			{
 				var arrayOfValuesParameter = Expression.Parameter(typeof(object[]));
 				var parametrizedBody = Parametrize(expression, arrayOfValuesParameter);
+
 				var effectiveQuery = Expression.Lambda<Func<object[], object>>(
 					parametrizedBody,
 					arrayOfValuesParameter

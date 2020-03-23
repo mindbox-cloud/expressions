@@ -10,7 +10,10 @@ namespace Mindbox.Expressions
 			ParameterExpression arrayOfValues)
 		{
 			var visitor = new ClosureCapturedValuesParametrizer(arrayOfValues);
-			return visitor.Visit(expression);
+			var parametrizedBody = visitor.Visit(expression);
+			return parametrizedBody.Type.IsPrimitive
+				? Expression.Convert(parametrizedBody, typeof(object))
+				: parametrizedBody;
 		}
 
 		private readonly ParameterExpression arrayOfValues;
