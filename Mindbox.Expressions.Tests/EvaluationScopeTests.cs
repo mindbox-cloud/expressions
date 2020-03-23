@@ -114,5 +114,29 @@ namespace Mindbox.Expressions.Tests
 
 			Assert.AreEqual(3, result);
 		}
+
+		[TestMethod]
+		public void ArrayLengthExpression()
+		{
+			var array = new [] { 1, 2, 3 };
+
+			Expression<Func<int>> wrappingLambda = () => array.Length;
+
+			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
+
+			Assert.AreEqual(3, result);
+		}
+
+		[TestMethod]
+		public void ArrayLengthConvertedExpression()
+		{
+			var array = new [] { 1, 2, 3 };
+
+			Expression<Func<object>> wrappingLambda = () => (object)array.Length;
+
+			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
+
+			Assert.AreEqual(3, result);
+		}
 	}
 }
