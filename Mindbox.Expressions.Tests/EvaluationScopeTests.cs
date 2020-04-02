@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -20,14 +22,6 @@ namespace Mindbox.Expressions.Tests
 			public long Sum(int a, short b) => a + b;
 
 			public static long StaticSum(int a, short b) => a + b;
-
-			public static Holder operator-(Holder other)
-			{
-				return new Holder
-				{
-					Field = -other.Field
-				};
-			}
 		}
 
 		private readonly Holder holder = new Holder();
@@ -36,71 +30,43 @@ namespace Mindbox.Expressions.Tests
 		[TestMethod]
 		public void ConstantExpression()
 		{
-			var constantExpression = Expression.Constant(1);
-
-			var result = EvaluationScope.Empty.TryEvaluate(constantExpression);
-
-			Assert.AreEqual(1, result);
+			AssertIdenticalResult(() => 1);
 		}
 
 		[TestMethod]
 		public void PropertyExpression()
 		{
-			Expression<Func<byte>> wrappingLambda = () => holder.Property;
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual((byte)2, result);
+			AssertIdenticalResult(() => holder.Property);
 		}
 
 		[TestMethod]
 		public void StaticPropertyExpression()
 		{
-			Expression<Func<short>> wrappingLambda = () => Holder.StaticProperty;
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual((short)4, result);
+			AssertIdenticalResult(() => Holder.StaticProperty);
 		}
 
 		[TestMethod]
 		public void FieldExpression()
 		{
-			Expression<Func<int>> wrappingLambda = () => holder.Field;
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual(8, result);
+			AssertIdenticalResult(() => holder.Field);
 		}
 
 		[TestMethod]
 		public void StaticFieldExpression()
 		{
-			Expression<Func<long>> wrappingLambda = () => Holder.StaticField;
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual(16L, result);
+			AssertIdenticalResult(() => Holder.StaticField);
 		}
 
 		[TestMethod]
 		public void MethodCallExpression()
 		{
-			Expression<Func<long>> wrappingLambda = () => holder.Sum(3, 11);
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual(14L, result);
+			AssertIdenticalResult(() => holder.Sum(3, 11));
 		}
 
 		[TestMethod]
 		public void StaticMethodCallExpression()
 		{
-			Expression<Func<long>> wrappingLambda = () => Holder.StaticSum(7, 13);
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual(20L, result);
+			AssertIdenticalResult(() => Holder.StaticSum(7, 13));
 		}
 
 		[TestMethod]
@@ -108,11 +74,7 @@ namespace Mindbox.Expressions.Tests
 		{
 			var array = new [,] { { 1, 2 }, { 3, 4 } };
 
-			Expression<Func<int>> wrappingLambda = () => array[1, 0];
-
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
-
-			Assert.AreEqual(3, result);
+			AssertIdenticalResult(() => array[1, 0]);
 		}
 
 		[TestMethod]
@@ -120,23 +82,146 @@ namespace Mindbox.Expressions.Tests
 		{
 			var array = new [] { 1, 2, 3 };
 
-			Expression<Func<int>> wrappingLambda = () => array.Length;
+			AssertIdenticalResult(() => array.Length);
+		}
 
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
+		struct Convertible
+		{
+			public static implicit operator string(Convertible c)
+			{
+				return "-10";
+			}
 
-			Assert.AreEqual(3, result);
+			public static explicit operator int(Convertible c)
+			{
+				return 10;
+			}
 		}
 
 		[TestMethod]
-		public void ArrayLengthConvertedExpression()
+		public void UnaryExpression_Convert_ImplicitMethod()
 		{
-			var array = new [] { 1, 2, 3 };
+			AssertIdenticalResult<string>(() => new Convertible());
+		}
 
-			Expression<Func<object>> wrappingLambda = () => (object)array.Length;
+		[TestMethod]
+		public void UnaryExpression_Convert_ExplicitMethod()
+		{
+			AssertIdenticalResult(() => (int) new Convertible());
+		}
 
-			var result = EvaluationScope.Empty.TryEvaluate(wrappingLambda.Body);
+		[TestMethod]
+		public void UnaryExpression_Convert_IntToLong()
+		{
+			AssertIdenticalResult(Expression.Lambda<Func<long>>(
+				Expression.Convert(
+					Expression.Constant(1, typeof(int)),
+					typeof(long))));
+		}
 
-			Assert.AreEqual(3, result);
+		[TestMethod]
+		public void UnaryExpression_Convert_IntToNullableInt()
+		{
+			AssertIdenticalResult(Expression.Lambda<Func<int?>>(
+				Expression.Convert(
+					Expression.Constant(1, typeof(int)),
+					typeof(int?))));
+		}
+
+		[TestMethod]
+		public void UnaryExpression_Convert_IntToNullableLong()
+		{
+			AssertIdenticalResult(
+				Expression.Lambda<Func<long?>>(
+					Expression.Convert(
+						Expression.Constant(1, typeof(int)),
+						typeof(long?))));
+		}
+
+		[TestMethod]
+		public void UnaryExpression_Convert_ValueTypeToObject()
+		{
+			AssertIdenticalResult(() => (object) 1);
+		}
+
+		[TestMethod]
+		public void UnaryExpression_Convert_ObjectToValueType()
+		{
+			var boxedInt = (object) 1;
+			AssertIdenticalResult(() => (int)boxedInt);
+		}
+
+		class Super { }
+
+		class Sub : Super { }
+
+		[TestMethod]
+		public void UnaryExpression_Convert_ObjectToObject_CastSubclassToSuperclass()
+		{
+			var obj = new Sub();
+			AssertIdenticalResult(() => (Super)obj);
+		}
+
+		[TestMethod]
+		public void UnaryExpression_Convert_ObjectToObject_CastSuperclassToSubclass()
+		{
+			Super obj = new Sub();
+			AssertIdenticalResult(() => (Sub)obj);
+		}
+
+		[TestMethod]
+		public void UnaryExpression_Convert_EvaluateValueCastThrows()
+		{
+			var obj = (object)new KeyValuePair<int, int>();
+			AssertIdenticalException<object, InvalidCastException>(() => (KeyValuePair<int, long>)obj);
+		}
+
+		struct ValueStruct
+		{
+			public int Value { get; set; }
+
+			public static ValueStruct operator -(ValueStruct negated)
+			{
+				return new ValueStruct
+				{
+					Value = -negated.Value
+				};
+			}
+		}
+
+		[TestMethod]
+		public void UnaryExpression_OperatorCall()
+		{
+			AssertIdenticalResult(() => -new ValueStruct { Value = 1 });
+		}
+
+		[TestMethod]
+		public void UnaryExpression_OperatorCall_LiftedToNull_NonNullOperand()
+		{
+			AssertIdenticalResult<ValueStruct?>(() => -new ValueStruct { Value = 1 });
+		}
+
+		[TestMethod]
+		public void UnaryExpression_OperatorCall_LiftedToNull_NullOperand()
+		{
+			AssertIdenticalResult<ValueStruct?>(() => -(ValueStruct?)null);
+		}
+
+		private static void AssertIdenticalResult<TResult>(Expression<Func<TResult>> expression)
+		{
+			var evaluatedResult = (TResult)EvaluationScope.Empty.TryEvaluate(expression.Body);
+
+			var compiledExpressionResult = expression.Compile()();
+
+			Assert.AreEqual(compiledExpressionResult, evaluatedResult);
+		}
+
+		private static void AssertIdenticalException<TResult, TException>(Expression<Func<TResult>> expression)
+			where TException : Exception
+		{
+			Assert.ThrowsException<TException>(() => EvaluationScope.Empty.TryEvaluate(expression.Body));
+			Assert.ThrowsException<TException>(() => expression.Compile()());
+
 		}
 	}
 }
