@@ -702,6 +702,10 @@ namespace Mindbox.Expressions
 				case ExpressionType.PostDecrementAssign:
 					Out("--");
 					break;
+				case ExpressionType.Convert:
+					Out(node.Type.FullName);
+					Out(")");
+					break;
 				default:
 					Out(")");
 					break;
