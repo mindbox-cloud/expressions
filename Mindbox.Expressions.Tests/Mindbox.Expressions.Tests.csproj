@@ -55,6 +55,7 @@
     <Compile Include="ExpandExpressionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExpressionsTests.cs" />
+    <Compile Include="ExpressionFunctionTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
