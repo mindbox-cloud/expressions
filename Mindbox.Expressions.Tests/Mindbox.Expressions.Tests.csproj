@@ -53,6 +53,7 @@
     <Compile Include="EvaluateTests.cs" />
     <Compile Include="EvaluationScopeTests.cs" />
     <Compile Include="ExpandExpressionTests.cs" />
+    <Compile Include="ParameterHolderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReflectionExpressionsTests.cs" />
     <Compile Include="ExpressionFunctionTests.cs" />

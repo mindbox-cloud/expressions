@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Resources;
 
@@ -12,31 +14,32 @@ namespace Mindbox.Expressions
 			
 		}
 
-		private readonly ConcurrentDictionary<string, Func<object[], object>> compiledExpressionsCache = 
-			new ConcurrentDictionary<string, Func<object[], object>>();
+		private readonly ConcurrentDictionary<string, Func<object, object>> compiledExpressionsCache =
+			new ConcurrentDictionary<string, Func<object, object>>();
 
 		public object Evaluate(Expression expression)
 		{
 			var cacheKey = MindboxExpressionStringBuilder.ExpressionToString(expression);
+			var capturedValues = GetCapturedValues(expression);
+			var parametersTuple = ParameterHolderFactory.Create(capturedValues);
 			var cachedDelegate = compiledExpressionsCache.GetOrAdd(cacheKey, key =>
 			{
-				var arrayOfValuesParameter = Expression.Parameter(typeof(object[]));
-				var parametrizedBody = Parametrize(expression, arrayOfValuesParameter);
+				var tupleParameter = Expression.Parameter(typeof(object));
+				var parametrizedBody = Parametrize(expression, tupleParameter);
 				if (parametrizedBody.Type.IsValueType)
 				{
 					parametrizedBody = Expression.Convert(parametrizedBody, typeof(object));
 				}
 
-				var effectiveQuery = Expression.Lambda<Func<object[], object>>(
+				var effectiveQuery = Expression.Lambda<Func<object, object>>(
 					parametrizedBody,
-					arrayOfValuesParameter
+					tupleParameter
 				);
 
 				return effectiveQuery.Compile();
 			});
 
-			var capturedValues = GetCapturedValues(expression);
-			return cachedDelegate(capturedValues);
+			return cachedDelegate(parametersTuple);
 		}
 
 		private static Expression Parametrize(
@@ -48,11 +51,13 @@ namespace Mindbox.Expressions
 				arrayOfValuesParameter);
 		}
 
-		private static object[] GetCapturedValues(Expression expression)
+		private static List<object> GetCapturedValues(Expression expression)
 		{
 			return ClosureCapturedValuesProvider.GetCapturedValues(expression);
 		}
 
 		public static CachingCompilingExpressionEvaluator Instance { get; } = new CachingCompilingExpressionEvaluator();
 	}
+
+
 }
