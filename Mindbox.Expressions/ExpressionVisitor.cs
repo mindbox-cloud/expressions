@@ -102,6 +102,11 @@ namespace Mindbox.Expressions
 
 				case ExpressionType.ListInit:
 					return VisitListInit((ListInitExpression)exp);
+				
+				// Expression types can be extended by third-party libraries (for example, EntityFramework Core).
+				// These extensions are assumed not expandable, but valid.
+				case ExpressionType.Extension:
+					return exp;
 
 				default:
 					throw new Exception(string.Format("Unhandled expression type: '{0}'", exp.NodeType));
