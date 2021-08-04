@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Mindbox.Expressions
 {
@@ -16,14 +17,33 @@ namespace Mindbox.Expressions
 				: parametrizedBody;
 		}
 
-		private readonly ParameterExpression arrayOfValues;
+		private static readonly MethodInfo[] properties;
 
-		private int visitedIndex = 0;
+		static ClosureCapturedValuesParametrizer()
+		{
+			var type = typeof(ParameterHolder);
+
+			properties = new[]
+			{
+				type.GetProperty("P0").GetMethod,
+				type.GetProperty("P1").GetMethod,
+				type.GetProperty("P2").GetMethod,
+				type.GetProperty("P3").GetMethod,
+				type.GetProperty("P4").GetMethod,
+				type.GetProperty("P5").GetMethod,
+				type.GetProperty("P6").GetMethod,
+				type.GetProperty("P7").GetMethod
+			};
+		}
+
+		private readonly ParameterExpression parametersExpression;
+
+		private int visitedIndex;
 
 		private ClosureCapturedValuesParametrizer(
-			ParameterExpression arrayOfValues)
+			ParameterExpression parametersExpression)
 		{
-			this.arrayOfValues = arrayOfValues;
+			this.parametersExpression = parametersExpression;
 		}
 
 		protected override Expression TryProcessClosure(ConstantExpression node)
@@ -33,11 +53,31 @@ namespace Mindbox.Expressions
 
 		private UnaryExpression CreateIndexExpression(ConstantExpression node)
 		{
+			var propertyAccess = CreatePropertyAccess(parametersExpression, visitedIndex);
+
 			var indexExpression = Expression.Convert(
-				Expression.ArrayIndex(arrayOfValues, Expression.Constant(visitedIndex)),
+				propertyAccess,
 				node.Type);
 			visitedIndex++;
 			return indexExpression;
+		}
+
+		private static MemberExpression CreatePropertyAccess(Expression rootExpression, int index)
+		{
+			while (true)
+			{
+				if (index < 8)
+				{
+					return Expression.Property(
+						Expression.Convert(rootExpression, typeof(ParameterHolder)),
+						properties[index]);
+				}
+
+				var indexPart = index & 0x7;
+				var restPart = index >> 3;
+				rootExpression = CreatePropertyAccess(rootExpression, restPart);
+				index = indexPart;
+			}
 		}
 	}
 }

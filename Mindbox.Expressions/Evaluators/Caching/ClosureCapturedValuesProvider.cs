@@ -6,12 +6,12 @@ namespace Mindbox.Expressions
 {
 	internal class ClosureCapturedValuesProvider : ClosureCapturedValuesVisitor
 	{
-		public static object[] GetCapturedValues(Expression expression)
+		public static List<object> GetCapturedValues(Expression expression)
 		{
 			var visitor = new ClosureCapturedValuesProvider();
 			visitor.Visit(expression);
 
-			return visitor.capturedValues.ToArray();
+			return visitor.capturedValues;
 		}
 
 		private ClosureCapturedValuesProvider()
