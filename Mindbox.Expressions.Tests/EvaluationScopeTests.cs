@@ -204,7 +204,8 @@ namespace Mindbox.Expressions.Tests
 		[TestMethod]
 		public void UnaryExpression_OperatorCall_LiftedToNull_NullOperand()
 		{
-			AssertIdenticalResult<ValueStruct?>(() => -(ValueStruct?)null);
+			var nullValueStruct = (ValueStruct?) null;
+			AssertIdenticalResult(() => -nullValueStruct);
 		}
 
 		private static void AssertIdenticalResult<TResult>(Expression<Func<TResult>> expression)
