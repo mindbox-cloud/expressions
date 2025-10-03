@@ -15,13 +15,55 @@ namespace Mindbox.Expressions.Tests
 	[TestClass]
 	public class ExpandExpressionTests
 	{
+		public interface ITest
+		{
+			int Value { get; }
+		}
+		
+		public class A : ITest
+		{
+			public int Value { get; set; }
+		}
+
+		public class B : ITest
+		{
+			public int Value { get; set; }
+		}
+		
 		[TestInitialize]
 		public void Initialize()
 		{
 			ExpressionsConfiguration.ExpressionEvaluatorFactory =
-				() => InterpretingExpressionEvaluator.Instance;
+				() => CachingCompilingExpressionEvaluator.Instance;
 		}
 
+		private Expression<Func<TTestInterface, int>> 
+			GetSimleFExpression<TTestInterface>()
+			where TTestInterface : ITest
+		{
+			Expression<Func<TTestInterface, int>> f1 = x => x.Value;
+			return f1;
+		}
+		
+		private Expression<Func<TTestInterface, Expression<Func<TTestInterface, int>>>> 
+			GetFExpression<TTestInterface>()
+			where TTestInterface : ITest, new()
+		{
+			Expression<Func<TTestInterface, Expression<Func<TTestInterface, int>>>> f1 = x => y => 
+				x.Value + y.Value;
+			return f1;
+		}
+
+		[TestMethod]
+		public void ExpandWithGenericParameters()
+		{
+			Expression<Func<A, int>> f2 = x => GetFExpression<A>().Evaluate(x).Evaluate(x);
+			Expression<Func<B, int>> f3 = x => GetFExpression<B>().Evaluate(x).Evaluate(x);
+			
+			var result1 = f2.ExpandExpressions();
+			var result2 = f3.ExpandExpressions();
+		}
+		
 		[TestMethod]
 		public void ExpandExpressionsSimpleTest()
 		{
