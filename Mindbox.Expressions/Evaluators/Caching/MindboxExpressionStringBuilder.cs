@@ -565,6 +565,24 @@ namespace Mindbox.Expressions
 				Out(".");
 			}
 			Out(node.Method.Name);
+
+			if (node.Method.IsGenericMethod)
+			{
+				Out("<");
+				var isFirst = true;
+				foreach (var genericArgument in node.Method.GetGenericArguments())
+				{
+					if (!isFirst)
+					{
+						Out(",");
+					}
+					isFirst = false;
+							
+					Out(genericArgument.ToString());
+				}
+				Out(">");
+			}
+			
 			Out("(");
 			for (int i = start, n = node.Arguments.Count; i < n; i++)
 			{
